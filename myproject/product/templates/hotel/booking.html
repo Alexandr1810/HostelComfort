@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<h1>Комфорт Отель</h1>
+		<a href="{% url 'login' %}">Логин /</a>
+		<a href="{% url 'register' %}">Регистрация</a>
+	</div>
+
+	<div> 
+		<div>
+			<div>Дата заезда</div>
+			<input type="date">
+			<div>Дата выезда</div>
+			<input type="date">
+		</div>
+		<div>
+			<div>Контактная информация</div>
+			<input type="tel" placeholder="Номер телефона" required>
+			<br>
+			<input type="email" placeholder="email" required>
+		</div>
+		<div>
+			<div>К оплает сейчас: 6000 руб</div>
+			<a href="{% url 'booking_info' %}"><button>Оплатить</button></a>
+		</div>
+	</div>
+</body>
+</html>
