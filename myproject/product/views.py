@@ -32,3 +32,12 @@ def hotel(request):
 def hotel_info(request, id):
     hotel = get_object_or_404(Hotel, id=id)  # Получаем отель по ID
     return render(request, 'hotel/hotel_info.html', {'hotel': hotel})
+
+def booking(request, id):
+    hotel = get_object_or_404(Hotel, id=id)  # Получаем отель по ID
+    return render(request, 'hotel/booking.html', {'hotel': hotel})
+
+def booking_info(request, id):
+    hotel = get_object_or_404(Hotel, id=id)  # Получаем отель по ID
+    return render(request, 'hotel/booking_info.html', {'hotel': hotel})
+

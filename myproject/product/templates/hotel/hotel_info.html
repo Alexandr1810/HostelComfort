@@ -29,7 +29,7 @@
 		<img src="image.jpg" alt="image">
 	</div>
 	<div>{{hotel.price}} руб/ночь</div>
-	<a href="{% url 'booking' %}"><button>Забронированить</button></a>
+	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
 
 	<div>Отзывы</div>
 	<div>
