@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import Hotel
+from .models import Hotel, Room
 
 # Create your views here.
 def hotel(request):
@@ -28,6 +28,10 @@ def profile(request):
 def hotel(request):
     hotel = Hotel.objects.all()
     return render(request, 'hotel/index.html', {'hotel': hotel})
+
+def hotel_info(request):
+    hotel_info = Room.objects.all()
+    return render(request, 'hotel/hotel_info.html', {'hotel_info': hotel_info})
 
 def hotel_info(request, id):
     hotel = get_object_or_404(Hotel, id=id)  # Получаем отель по ID

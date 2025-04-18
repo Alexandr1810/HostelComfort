@@ -13,20 +13,19 @@
 	</div>
 
 	<div>
-		<div>		
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-		</div>
-		<div>
-			<div>Название отеля: {{ hotel.name }}</div>
-			<div>Адрес отеля: {{ hotel.address }}</div>
-			<div>Об отеле: <br> Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }} <br> Рейтинг: {{ hotel.rating }} </div>
-			<div>Описание отеля: {{ hotel.description }}</div>
-		</div>
+		<div>Рейтинг: {{ hotel.rating }}</div> 
+		<div>Название отеля: {{ hotel.name }}</div>
+		<div>Адрес отеля: {{ hotel.address }}</div>
+	</div>
 	<div>
 		<img src="image.jpg" alt="image">
 		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+	</div>
+	<div>
+		<div>Об отеле</div>
+		<div>Описание отеля: {{ hotel.description }}</div>
+		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
 	</div>
 	<div>{{hotel.price}} руб/ночь</div>
 	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
