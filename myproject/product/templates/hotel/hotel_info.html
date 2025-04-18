@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<h1>Комфорт Отель</h1>
+		<a href="{% url 'login' %}">Логин /</a>
+		<a href="{% url 'register' %}">Регистрация</a>
+	</div>
+
+	<div>
+		<div>		
+			<img src="image.jpg" alt="image">
+			<img src="image.jpg" alt="image">
+			<img src="image.jpg" alt="image">
+		</div>
+		<div>
+			<div>Название отеля 1</div>
+			<div>ул Пушкина 4</div>
+		</div>
+	<div>	
+	<div>
+		<div>Об отеле</div>
+		<div>Описание отеля</div>
+	</div>
+
+
+	<div>Название номера</div>
+	<div>Массив</div>
+
+	<div>
+		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+	</div>
+	<div>6000руб/ночь</div>
+	<a href="{% url 'booking' %}"><button>Забронированить</button></a>
+
+	<div>Отзывы</div>
+	<div>
+		<textarea placeholder="Напишите отзыв"></textarea>
+		<button>Отправить</button>
+	</div>
+	<div>Вывести имя пользователя</div>
+	<div>Вывести комментарий</div>
+</body>
+</html>

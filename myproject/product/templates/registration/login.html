@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<div>Войти</div>
+		<div> 
+			<input type="tel" placeholder="Номер телефона" required>
+			<br>
+			<input type="password" placeholder="Пароль" required>
+		</div>
+		<a href="{% url 'profile' %}"><button>Вход</button></a>
+		<br>
+		<a href="{% url 'register' %}"><button>Зарегистрироваться</button></a>
+	</div>
+</body>
+</html>

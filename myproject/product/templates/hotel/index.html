@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Индекс</title>
+</head>
+<body>
+	<div>
+		<h1>Комфорт Отель</h1>
+		<a href="{% url 'login' %}">Логин /</a>
+		<a href="{% url 'register' %}">Регистрация</a>
+	</div>
+
+	<div>
+		<h2>Фильтр</h2>
+		<h3>Цена</h3>
+		<input type="text" placeholder="Минимальная цена">
+		<input type="text" placeholder="Максимальная цена">
+	</div>
+
+	<div>
+		{% for el in hotel %}
+		<div>
+			<img src="image.jpg" alt="image">
+			<img src="image.jpg" alt="image">
+			<img src="image.jpg" alt="image">
+		</div>
+		<div>
+			<div>Название отеля: {{el.name}}</div>
+			<div>Адрес отеля: {{el.address}}</div>
+			<div>{{el.price}} руб/ночь</div>
+			<a href="{% url 'hotel_info' %}"><button>Выбрать</button></a>
+		</div>
+		{% endfor %}
+	</div>
+</body>
+</html>

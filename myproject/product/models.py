@@ -9,6 +9,7 @@ class Hotel(models.Model):
     email = models.CharField('Email', max_length=100)
     description = models.CharField('Описание', max_length=100)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
+    price = models.IntegerField('Цена', max_length=50)
 
     def __str__(self):
         return self.name
