@@ -28,3 +28,7 @@ def profile(request):
 def hotel(request):
     hotel = Hotel.objects.all()
     return render(request, 'hotel/index.html', {'hotel': hotel})
+
+def hotel_info(request, id):
+    hotel = get_object_or_404(Hotel, id=id)  # Получаем отель по ID
+    return render(request, 'hotel/hotel_info.html', {'hotel': hotel})

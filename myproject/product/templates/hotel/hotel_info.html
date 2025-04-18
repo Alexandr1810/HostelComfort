@@ -19,29 +19,22 @@
 			<img src="image.jpg" alt="image">
 		</div>
 		<div>
-			<div>Название отеля 1</div>
-			<div>ул Пушкина 4</div>
+			<div>Название отеля: {{ hotel.name }}</div>
+			<div>Адрес отеля: {{ hotel.address }}</div>
+			<div>Об отеле: <br> Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }} <br> Рейтинг: {{ hotel.rating }} </div>
+			<div>Описание отеля: {{ hotel.description }}</div>
 		</div>
-	<div>	
-	<div>
-		<div>Об отеле</div>
-		<div>Описание отеля</div>
-	</div>
-
-
-	<div>Название номера</div>
-	<div>Массив</div>
-
 	<div>
 		<img src="image.jpg" alt="image">
 		<img src="image.jpg" alt="image">
 	</div>
-	<div>6000руб/ночь</div>
+	<div>{{hotel.price}} руб/ночь</div>
 	<a href="{% url 'booking' %}"><button>Забронированить</button></a>
 
 	<div>Отзывы</div>
 	<div>
 		<textarea placeholder="Напишите отзыв"></textarea>
+		<br>
 		<button>Отправить</button>
 	</div>
 	<div>Вывести имя пользователя</div>
