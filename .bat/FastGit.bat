@@ -96,7 +96,21 @@ goto menu
 	)
 	git merge -m "%user_input%" %branch_name2%
 	git push origin %branch_name1%
+	endlocal
 	goto menu
 
+:delete_branch
+	setlocal
+	set "script_dir=%~dp0"
+	cd /d "%script_dir%"
+
+	git branch
+	set /p branch_name="Введи название ветки которую нужно удалить: "
+	git branch -D %branch_name%
+	git push origin --delete %branch_name%
+	git fetch -p
+	echo Ветка %branch_name% удалена
+	endlocal
+	goto menu
 :quit
-	
+	exit	
