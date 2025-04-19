@@ -30,7 +30,7 @@
 			<div>Название отеля: {{el.name}}</div>
 			<div>Адрес отеля: {{el.address}}</div>
 			<div>{{el.price}} руб/ночь</div>
-			<a href="{% url 'hotel_info' %}"><button>Выбрать</button></a>
+			<a href="{% url 'hotel_info' el.id %}"><button>Выбрать</button></a>
 		</div>
 		{% endfor %}
 	</div>

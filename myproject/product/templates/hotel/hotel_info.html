@@ -13,35 +13,27 @@
 	</div>
 
 	<div>
-		<div>		
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-		</div>
-		<div>
-			<div>Название отеля 1</div>
-			<div>ул Пушкина 4</div>
-		</div>
-	<div>	
+		<div>Рейтинг: {{ hotel.rating }}</div> 
+		<div>Название отеля: {{ hotel.name }}</div>
+		<div>Адрес отеля: {{ hotel.address }}</div>
+	</div>
+	<div>
+		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+	</div>
 	<div>
 		<div>Об отеле</div>
-		<div>Описание отеля</div>
+		<div>Описание отеля: {{ hotel.description }}</div>
+		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
 	</div>
-
-
-	<div>Название номера</div>
-	<div>Массив</div>
-
-	<div>
-		<img src="image.jpg" alt="image">
-		<img src="image.jpg" alt="image">
-	</div>
-	<div>6000руб/ночь</div>
-	<a href="{% url 'booking' %}"><button>Забронированить</button></a>
+	<div>{{hotel.price}} руб/ночь</div>
+	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
 
 	<div>Отзывы</div>
 	<div>
 		<textarea placeholder="Напишите отзыв"></textarea>
+		<br>
 		<button>Отправить</button>
 	</div>
 	<div>Вывести имя пользователя</div>
