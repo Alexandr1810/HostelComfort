@@ -90,7 +90,6 @@ goto menu
 	set /p branch_name1="Введи название ветки в которую нужно внести изменения: "
 	set /p branch_name2="Введи название ветки из которой нужно взять изменения: "
 	git checkout %branch_name1%
-	git pull origin %branch_name1%
 	set /p user_input="Комментарий: "
 	if "%user_input%"=="" (
 		git merge -m "Fast merge" %branch_name2%
