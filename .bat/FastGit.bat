@@ -11,19 +11,17 @@ echo = 2. Сделать обычный коммит         =
 echo = 3. Переключиться на другую ветку  =
 echo = 4. Создать новую ветку            =
 echo = 5. Удалить определённую ветку     =
-echo = 6. Выполнить слияние(merge) веток =
-echo = 7. Выход                          =
+echo = 6. Выход                          =
 echo =====================================
 echo.
-set /p choice="Выберите действие (1-7): "
+set /p choice="Выберите действие (1-6): "
 
 if "%choice%"=="1" goto fast_commit
 if "%choice%"=="2" goto commit
 if "%choice%"=="3" goto checkout
 if "%choice%"=="4" goto create_new_branch
 if "%choice%"=="5" goto delete_branch
-if "%choice%"=="6" goto merge
-if "%choice%"=="7" goto quit
+if "%choice%"=="6" goto quit
 
 echo Ты написал что-то кроме предложенных вариантов
 pause
@@ -86,18 +84,17 @@ goto menu
 	setlocal
 	set "script_dir=%~dp0"
 	cd /d "%script_dir%"
+	git branch
 	set /p branch_name1="Введи название ветки в которую нужно внести изменения: "
 	set /p branch_name2="Введи название ветки из которой нужно взять изменения: "
 	git checkout %branch_name1%
-	git pull origin %branch_name1%
-	git merge %branch_name2%
 	set /p user_input="Комментарий: "
 	if "%user_input%"=="" (
-		git commit -m "fast merge"
+		git merge -m "Fast merge" %branch_name2%
 		git push origin %branch_name1%
 		goto menu
 	)
-	git commit -m "%user_input%"
+	git merge -m "%user_input%" %branch_name2%
 	git push origin %branch_name1%
 	goto menu
 
