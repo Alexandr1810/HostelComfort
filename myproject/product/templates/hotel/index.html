@@ -15,8 +15,18 @@
 	<div>
 		<h2>Фильтр</h2>
 		<h3>Цена</h3>
-		<input type="text" placeholder="Минимальная цена">
-		<input type="text" placeholder="Максимальная цена">
+		<form method="get" action="" id="price-filter-form">
+			<input type="text" name="min_price" placeholder="Минимальная цена" value="{{ request.GET.min_price }}">
+			<input type="text" name="max_price" placeholder="Максимальная цена" value="{{ request.GET.max_price }}">
+		</form>
+		<script>
+			const form = document.getElementById('price-filter-form');
+			form.querySelectorAll('input').forEach(input => {
+				input.addEventListener('change', () => {
+					form.submit();
+				});
+			});
+		</script>
 	</div>
 
 	<div>
