@@ -25,12 +25,10 @@ goto menu
 :fast_commit
 setlocal
 set "script_dir=%~dp0"
-for /f "delims=" %%i in ('git config user.name') do set "username=%%i"
 cd /d "%script_dir%"
-username=$(git config user.name)
 for /f "delims=" %%b in ('git rev-parse --abbrev-ref HEAD') do set "current_branch=%%b"
 git add .
-git commit -m "fast commit (%username%)"
+git commit -m "fast commit"
 git push origin %current_branch%
 endlocal
 goto menu
