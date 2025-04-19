@@ -7,4 +7,4 @@ cd ..
 
 :: Активируем окружение и запускаем новую cmd
 call myenv\Scripts\activate.bat
-cmd /k
+python HostelComfort\myproject\manage.py runserver

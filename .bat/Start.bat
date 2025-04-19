@@ -65,11 +65,12 @@ goto download_python
 	py -m venv myenv
 	goto download_lib_to_venv
 
-:: Готов
+:: Готовs
 :download_lib_to_venv
 	cd /d "%script_dir%"
 	call myenv\Scripts\activate.bat
 	pip install numpy
+	pip install django
 	pip freeze > requirements.txt
 	goto other
 
