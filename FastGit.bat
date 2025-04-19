@@ -40,7 +40,7 @@ cd /d "%script_dir%"
 set /p user_input="Комментарий: "
 for /f "delims=" %%b in ('git rev-parse --abbrev-ref HEAD') do set "current_branch=%%b"
 git add .
-git commit -m "%user_input% (%username%)"
+git commit -m "%user_input%"
 git push origin %current_branch%
 endlocal
 goto menu
