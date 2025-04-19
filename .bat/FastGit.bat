@@ -112,5 +112,6 @@ goto menu
 	echo Ветка %branch_name% удалена
 	endlocal
 	goto menu
+	
 :quit
 	exit	
