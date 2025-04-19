@@ -86,18 +86,18 @@ goto menu
 	setlocal
 	set "script_dir=%~dp0"
 	cd /d "%script_dir%"
+	git branch
 	set /p branch_name1="Введи название ветки в которую нужно внести изменения: "
 	set /p branch_name2="Введи название ветки из которой нужно взять изменения: "
 	git checkout %branch_name1%
 	git pull origin %branch_name1%
-	git merge %branch_name2%
 	set /p user_input="Комментарий: "
 	if "%user_input%"=="" (
-		git commit -m "fast merge"
+		git merge -m "Fast merge" %branch_name2%
 		git push origin %branch_name1%
 		goto menu
 	)
-	git commit -m "%user_input%"
+	git merge -m "%user_input%" %branch_name2%
 	git push origin %branch_name1%
 	goto menu
 
