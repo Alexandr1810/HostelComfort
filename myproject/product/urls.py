@@ -25,4 +25,13 @@ urlpatterns = [
     path('login/', views.login, name = 'login'),
     path('register/', views.register, name = 'register'),
     path('profile/', views.profile, name = 'profile'),
+    
+    #frontend
+    path('hotel/', views.hotel_1, name = 'hotel_1'),
+    path('hotel_info_frontend/', views.hotel_info_1, name='hotel_info_1'),
+    path('booking_frontend/', views.booking_1, name = 'booking_1'),
+    path('booking_info_frontend/', views.booking_info_1, name = 'booking_info_1'),
+    path('login_frontend/', views.login_1, name = 'login_1'),
+    path('register_frontend/', views.register_1, name = 'register_1'),
+    path('profile_frontend/', views.profile_1, name = 'profile_1'),
 ]
