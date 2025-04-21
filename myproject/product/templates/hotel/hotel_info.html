@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<h1>Комфорт Отель</h1>
+		<a href="{% url 'login' %}">Логин /</a>
+		<a href="{% url 'register' %}">Регистрация</a>
+	</div>
+
+	<div>
+		<div>Рейтинг: {{ hotel.rating }}</div> 
+		<div>Название отеля: {{ hotel.name }}</div>
+		<div>Адрес отеля: {{ hotel.address }}</div>
+	</div>
+	<div>
+		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+		<img src="image.jpg" alt="image">
+	</div>
+	<div>
+		<div>Об отеле</div>
+		<div>Описание отеля: {{ hotel.description }}</div>
+		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
+	</div>
+	<div>{{hotel.price}} руб/ночь</div>
+	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
+
+	<div>Отзывы</div>
+	<div>
+		<textarea placeholder="Напишите отзыв"></textarea>
+		<br>
+		<button>Отправить</button>
+	</div>
+	<div>Вывести имя пользователя</div>
+	<div>Вывести комментарий</div>
+</body>
+</html>
