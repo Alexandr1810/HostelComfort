@@ -32,11 +32,13 @@
 		</div>
 		<div>
 			<h3>Ваши данные</h3>
-			{% if hotel %}
+			{% if user.is_authenticated and hotel %}
 					<div>
-							<p>Телефон: {{ hotel.contact_phone }}</p>
-							<p>Email: {{ hotel.email }}</p>
+						<p>Телефон: {{ hotel.contact_phone }}</p>
+						<p>Email: {{ hotel.email }}</p>
 					</div>
+			{% else %}
+					<div>Авторизируйтесь</div>
 			{% endif %}
 
 		<div>

@@ -33,8 +33,15 @@
 	</div>
 	<div>
 		<div>Об отеле</div>
-		<div>Описание отеля: {{ hotel.description }}</div>
-		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
+		{% for room in rooms %}
+			<div>Комната: {{ room.get_type_display }}</div>
+			{% if minbar and conditioner %}
+				<div>Дополнение: <br> {{ room.minbar }} <br> {{ room.conditioner }}</div>
+			{% endif %}
+				<div>Описание отеля: {{ hotel.description }}</div>
+				<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
+		{% endfor %}
+
 	</div>
 	<div>{{hotel.price}} руб/ночь</div>
 	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>

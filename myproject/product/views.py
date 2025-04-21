@@ -12,9 +12,20 @@ def hotel(request):
 
 def hotel_detail(request, id):
     hotel = get_object_or_404(Hotel, id=id)
+    # Используем hotel_id вместо hotel
+    rooms = Room.objects.filter(hotel_id=hotel.id)
+    
+    client = None
+    if request.user.is_authenticated:
+        try:
+            client = request.user.clients
+        except User.clients.RelatedObjectDoesNotExist:
+            pass
+    
     context = {
         'hotel': hotel,
-        'client': request.user.clients if request.user.is_authenticated else None
+        'rooms': rooms,
+        'client': client
     }
     return render(request, 'hotel/hotel_info.html', context)
 

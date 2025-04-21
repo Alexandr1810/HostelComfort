@@ -3,15 +3,26 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+
 # Create your models here.
 class Hotel(models.Model):
+    RATING_CHOICES = [
+        (0, '0'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
+
     name = models.CharField('Название', max_length=50)
     address = models.CharField('Адрес', max_length=50)
     contact_phone = models.CharField('Контактный номер', max_length=11)
     email = models.CharField('Email', max_length=100)
     description = models.CharField('Описание', max_length=100)
-    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
+    rating = models.IntegerField(choices=RATING_CHOICES)
     price = models.IntegerField('Цена')
+
 
     def __str__(self):
         return self.name
@@ -25,6 +36,11 @@ class Room(models.Model):
         (0, 'Одноместный'),
         (1, 'Двуместный'),
         (2, 'Люкс'),
+    ]
+
+    BOOL_TYPE_CHOICES = [
+        (0, 'Мини-Бар'), 
+        (1, 'Кондиционер')
     ]
 
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
@@ -42,7 +58,7 @@ class Room(models.Model):
 
 
 class Clients(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
     phio = models.CharField('ФИО', max_length=100)
     phone = models.CharField('Телефонный номер', max_length=11)
     email = models.CharField('Email', max_length=100)
