@@ -6,13 +6,6 @@
     <title>Комфорт Отель</title>
 </head>
 <body>
-<<<<<<< HEAD
-	<div>
-		<h1>Комфорт Отель</h1>
-		<a href="">Логин /</a>
-		<a href="">Регистрация</a>
-	</div>
-=======
     <div>
         <h1>Комфорт Отель</h1>
         <div>
@@ -28,7 +21,6 @@
             {% endif %}
         </div>
     </div>
->>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
 
     <div>
         <h2>Фильтр</h2>
@@ -38,22 +30,6 @@
             <button type="submit">Применить</button>
     </div>
 
-<<<<<<< HEAD
-	<div>
-		{% for el in hotel %}
-		<div>
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-			<img src="image.jpg" alt="image">
-		</div>
-		<div>
-			<div>Название отеля: {{el.name}}</div>
-			<div>Адрес отеля: {{el.address}}</div>
-			<div>руб/ночь</div>
-			<a href=""><button>Выбрать</button></a>
-		</div>
-	</div>
-=======
     <div>
         {% if hotel %}
             {% for el in hotel %}
@@ -78,6 +54,5 @@
             <p>Отели не найдены. Попробуйте изменить параметры поиска.</p>
         {% endif %}
     </div>
->>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
 </body>
 </html>

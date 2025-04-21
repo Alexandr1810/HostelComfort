@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'css/fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'css/fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-	<div>
-		<h1>Комфорт Отель</h1>
-		<a href="">Логин /</a>
-		<a href="">Регистрация</a>
-	</div>
+	<header style="background-image: url(https://cosmosgroup.ru/files/slider/85_1744637464.webp);">
+		<div class="innerHeader">
+			<span>Комфорт Отель</span>
+			<div class="loginBlock">
+				<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8(800)922-22-22</a>
+				<a class="loginBlock-link" href="#">войти</a>
+			</div>
+		</div>
+		<div class="innerTextBlock">
+			<h1>Холдинг "Комфорт Отель"</h1>
+			<h2>Севис бронирования отелей в Санкт-петербурге</h2>
+		</div>
+	</header>
 
 	<div>
 		<h2>Фильтр</h2>
@@ -20,17 +38,16 @@
 	</div>
 
 	<div>
-		{% for el in hotel %}
 		<div>
 			<img src="image.jpg" alt="image">
 			<img src="image.jpg" alt="image">
 			<img src="image.jpg" alt="image">
 		</div>
 		<div>
-			<div>Название отеля: {{el.name}}</div>
-			<div>Адрес отеля: {{el.address}}</div>
+			<div>Название отеля: </div>
+			<div>Адрес отеля: </div>
 			<div>руб/ночь</div>
-			<a href=""><button>Выбрать</button></a>
+			<a href="#"><button>Выбрать</button></a>
 		</div>
 	</div>
 </body>
