@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <title>Вход в систему</title>
+    <style>
+        .error { color: red; }
+        .form-group { margin-bottom: 15px; }
+    </style>
 </head>
 <body>
+<<<<<<< HEAD
 	<div>
 		<div>Войти</div>
 		<div> 
@@ -17,5 +21,30 @@
 		<br>
 		<a href=""><button>Зарегистрироваться</button></a>
 	</div>
+=======
+    <div>
+        <h2>Вход в систему</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        
+        <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+    </div>
+>>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
 </body>
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,3 +31,15 @@
 	</div>
 </body>
 </html>
+=======
+<form method="post">
+	{% csrf_token %}
+	{% if messages %}
+			{% for message in messages %}
+					<div class="alert alert-danger">{{ message }}</div>
+			{% endfor %}
+	{% endif %}
+	{{ form.as_p }}
+	<button type="submit">Зарегистрироваться</button>
+</form>
+>>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
