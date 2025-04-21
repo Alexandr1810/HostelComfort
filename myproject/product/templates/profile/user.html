@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Мой профиль</title>
 </head>
 <body>
-	<div>Личный кабинет</div>
-	<div>
-		<div>
-			<div>Вывести ФИО</div>
-			<div>Вывести номера телефона</div>
-			<div>Вывести email</div>
-			<div>Вывести id</div>
-		</div>
-	</div>
-	<div>Бронирования</div>
-	<div>
-		<div>
-			<div>Вывести название отеля 1</div>
-			<div>Вывести название номера</div>
-		</div>
-		<div>
-			<img src="image1.jpg" alt="image1">
-			<img src="image1.jpg" alt="image1">
-		</div>
-		<div>
-			<div>Вывести дата заезда</div>
-			<div>Вывести дата выезда</div>
-		</div>
-		<div> 
-			<div>Вывести цену</div>
-			<button>Отменить</button>
-		</div>
-	</div>
+    <h1>Добро пожаловать, {{ client.phio }}!</h1>
+    
+    <h2>Ваши данные:</h2>
+    <p>Телефон: {{ client.phone }}</p>
+    <p>Email: {{ client.email }}</p>
+    <p>Паспорт: {{ client.passport_seria }} {{ client.passport_num }}</p>
+    
+    <h2>Ваши бронирования:</h2>
+    <ul>
+        {% for reservation in reservations %}
+            <li>
+                Отель: {{ reservation.room_id.hotel_id.name }}<br>
+                Комната: {{ reservation.room_id.get_type_display }}<br>
+                Даты: {{ reservation.check_in_date|date:"d.m.Y" }} - {{ reservation.departure_date|date:"d.m.Y" }}<br>
+                Сумма: {{ reservation.total_amount }} руб.
+            </li>
+        {% empty %}
+            <li>У вас нет активных бронирований</li>
+        {% endfor %}
+    </ul>
+
+		<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
+			{% csrf_token %}
+			<button type="submit">Выйти</button>
+		</form>
+
+		<a href="{% url 'hotel' %}"><button>Посмотреть отели</button></a>
 </body>
 </html>

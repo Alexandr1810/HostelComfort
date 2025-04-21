@@ -10,8 +10,8 @@
 		<div>Бронирование Успешно</div>
 		<div>Название номера: {{ hotel.name }}</div>
 		<div>Вывести название номера</div>
-		<div>Вывести дату заезда</div>
-		<div>Вывести дату выезда</div>
+		<div>Дату заезда: {{ hotel.check_in_date }}</div>
+		<div>Дату выезда: {{ hotel.departure_date }}</div>
 		<a href="{% url 'hotel' %}"><button>Закрыть</button></a>
 	</div>
 </body>
