@@ -8,6 +8,6 @@ set "script_dir=%~dp0"
 cd /d "%script_dir%"
 
 :: Здесь вы можете добавить команды, которые хотите выполнить в этой директории
-git checkout ilya
+git checkout alexandr
 
 endlocal
