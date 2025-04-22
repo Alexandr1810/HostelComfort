@@ -8,26 +8,42 @@
 <body>
 	<div>
 		<h1>Комфорт Отель</h1>
-		<a href="{% url 'login' %}">Логин /</a>
-		<a href="{% url 'register' %}">Регистрация</a>
-	</div>
+		<div>
+				{% if user.is_authenticated %}
+						<a href="{% url 'user_profile' %}">Профиль</a> |
+						<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
+							{% csrf_token %}
+							<button type="submit">Выйти</button>
+						</form>
+				{% else %}
+						<a href="{% url 'login' %}">Войти</a> |
+						<a href="{% url 'register' %}">Регистрация</a>
+				{% endif %}
+		</div>
+</div>
 
 	<div> 
 		<div>
+			<h3>Выберите даты заезда в отель и выезда из отеля</h3>
 			<div>Дата заезда</div>
 			<input type="date">
 			<div>Дата выезда</div>
 			<input type="date">
 		</div>
 		<div>
-			<div>Контактная информация</div>
-			<input type="tel" placeholder="Номер телефона" required>
-			<br>
-			<input type="email" placeholder="email" required>
-		</div>
+			<h3>Ваши данные</h3>
+			{% if user.is_authenticated and hotel %}
+					<div>
+						<p>Телефон: {{ hotel.contact_phone }}</p>
+						<p>Email: {{ hotel.email }}</p>
+					</div>
+			{% else %}
+					<div>Авторизируйтесь</div>
+			{% endif %}
+
 		<div>
-			<div>К оплает сейчас: 6000 руб</div>
-			<a href="{% url 'booking_info' %}"><button>Оплатить</button></a>
+			<div>К оплате сейчас: {{ hotel.price }} руб</div>
+			<a href="{% url 'booking_info' hotel.id%}"><button>Оплатить</button></a>
 		</div>
 	</div>
 </body>
