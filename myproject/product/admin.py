@@ -19,3 +19,5 @@ admin.site.register(Room)
 admin.site.register(Reservations)
 admin.site.register(Reviews_and_ratings)
 
+
+

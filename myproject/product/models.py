@@ -47,6 +47,19 @@ class Room(models.Model):
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
     minbar = models.BooleanField('Мини-Бар', default=True)
     conditioner = models.BooleanField('Кондиционер', default=True)
+    television = models.BooleanField('Телевизор', default = True)
+    hairdryer = models.BooleanField("Фен", default = True)
+    safe = models.BooleanField("Сейф в номере", default = True)
+    Kettle_or_coffee_maker = models.BooleanField("Чайник или кофеварка", default = True)
+    Sound_insulation = models.BooleanField("Звукоизоляция", default = True)
+    Balcony_or_terrace = models.BooleanField("Балкон или терраса", default = True)
+    special_for_ivalid = models.BooleanField("Удобства для людей с ограниченными возможностями", default = True)
+    Telephone = models.BooleanField("Телефон", default = True)
+    Fridge = models.BooleanField("Холодильник", default = True)
+    Underfloor_heating = models.BooleanField("Пол с подогревом", default = True)
+    Work_facilities = models.BooleanField("Удобства для работы", default = True)
+    Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
+    
 
     def __str__(self):
         # Получаем человекочитаемое название типа комнаты
