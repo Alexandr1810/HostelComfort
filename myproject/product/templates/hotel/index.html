@@ -15,18 +15,8 @@
 	<div>
 		<h2>Фильтр</h2>
 		<h3>Цена</h3>
-		<form method="get" action="" id="price-filter-form">
-			<input type="text" name="min_price" placeholder="Минимальная цена" value="{{ request.GET.min_price }}">
-			<input type="text" name="max_price" placeholder="Максимальная цена" value="{{ request.GET.max_price }}">
-		</form>
-		<script>
-			const form = document.getElementById('price-filter-form');
-			form.querySelectorAll('input').forEach(input => {
-				input.addEventListener('change', () => {
-					form.submit();
-				});
-			});
-		</script>
+		<input type="text" placeholder="Минимальная цена">
+		<input type="text" placeholder="Максимальная цена">
 	</div>
 
 	<div>
@@ -40,7 +30,7 @@
 			<div>Название отеля: {{el.name}}</div>
 			<div>Адрес отеля: {{el.address}}</div>
 			<div>{{el.price}} руб/ночь</div>
-			<a href="{% url 'hotel_info' el.id %}"><button>Выбрать</button></a>
+			<a href="{% url 'hotel_info' %}"><button>Выбрать</button></a>
 		</div>
 		{% endfor %}
 	</div>

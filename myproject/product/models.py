@@ -31,7 +31,7 @@ class Room(models.Model):
     conditioner = models.BooleanField('Кондиционер', default=True)
 
     def __str__(self):
-        return self.type
+        return self.hotel_id
     
     class Meta:
         verbose_name = 'Комната'
@@ -39,8 +39,8 @@ class Room(models.Model):
 
 
 class Clients(models.Model):
-    phio = models.CharField('ФИО', max_length=100)
-    phone = models.CharField('Телефонный номер', max_length=11)
+    phio  = models.CharField('ФИО', max_length=100)
+    phone  = models.CharField('Телефонный номер', max_length=11)
     email = models.CharField('Email', max_length=100)
     password = models.CharField('Пароль', max_length=200)
     passport_seria = models.IntegerField('Серия паспорта', max_length=100)
