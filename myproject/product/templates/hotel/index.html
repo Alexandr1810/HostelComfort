@@ -24,12 +24,10 @@
 
     <div>
         <h2>Фильтр</h2>
-        <form method="get" action="{% url 'hotel' %}">
             <h3>Цена</h3>
-            <input type="number" name="min_price" placeholder="Минимальная цена" value="{{ request.GET.min_price }}">
-            <input type="number" name="max_price" placeholder="Максимальная цена" value="{{ request.GET.max_price }}">
+            <input type="number" name="min_price" placeholder="Минимальная цена">
+            <input type="number" name="max_price" placeholder="Максимальная цена">
             <button type="submit">Применить</button>
-        </form>
     </div>
 
     <div>

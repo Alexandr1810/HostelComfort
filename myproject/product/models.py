@@ -38,23 +38,15 @@ class Room(models.Model):
         (2, 'Люкс'),
     ]
 
+    BOOL_TYPE_CHOICES = [
+        (0, 'Мини-Бар'), 
+        (1, 'Кондиционер')
+    ]
+
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
-    minbar = models.BooleanField('Мини-Бар', default = True)
-    
-    conditioner = models.BooleanField('Кондиционер', default = True)
-    television = models.BooleanField('Телевизор', default = True)
-    hairdryer = models.BooleanField("Фен", default = True)
-    safe = models.BooleanField("Сейф в номере", default = True)
-    Kettle_or_coffee_maker = models.BooleanField("Чайник или кофеварка", default = True)
-    Sound_insulation = models.BooleanField("Звукоизоляция", default = True)
-    Balcony_or_terrace = models.BooleanField("Балкон или терраса", default = True)
-    special_for_ivalid = models.BooleanField("Удобства для людей с ограниченными возможностями", default = True)
-    Telephone = models.BooleanField("Телефон", default = True)
-    Fridge = models.BooleanField("Холодильник", default = True)
-    Underfloor_heating = models.BooleanField("Пол с подогревом", default = True)
-    Work_facilities = models.BooleanField("Удобства для работы", default = True)
-    Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
+    minbar = models.BooleanField('Мини-Бар', default=True)
+    conditioner = models.BooleanField('Кондиционер', default=True)
 
     def __str__(self):
         # Получаем человекочитаемое название типа комнаты
@@ -66,7 +58,7 @@ class Room(models.Model):
 
 
 class Clients(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True) 
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
     phio = models.CharField('ФИО', max_length=100)
     phone = models.CharField('Телефонный номер', max_length=11)
     email = models.CharField('Email', max_length=100)

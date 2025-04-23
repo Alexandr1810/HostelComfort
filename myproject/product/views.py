@@ -7,26 +7,8 @@ from .forms import RegisterForm, LoginForm
 from django.core.exceptions import ObjectDoesNotExist
 
 def hotel(request):
-    min_price = request.GET.get('min_price')
-    max_price = request.GET.get('max_price')
-
-    hotels = Hotel.objects.all()
-
-    if min_price:
-        try:
-            min_price_val = int(min_price)
-            hotels = hotels.filter(price__gte=min_price_val)
-        except ValueError:
-            pass
-
-    if max_price:
-        try:
-            max_price_val = int(max_price)
-            hotels = hotels.filter(price__lte=max_price_val)
-        except ValueError:
-            pass
-
-    return render(request, 'hotel/index.html', {'hotel': hotels})
+    hotel = Hotel.objects.all()
+    return render(request, 'hotel/index.html', {'hotel': hotel})
 
 def hotel_detail(request, id):
     hotel = get_object_or_404(Hotel, id=id)
