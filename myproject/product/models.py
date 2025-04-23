@@ -37,20 +37,28 @@ class Room(models.Model):
         (1, 'Двуместный'),
         (2, 'Люкс'),
     ]
-
-    BOOL_TYPE_CHOICES = [
-        (0, 'Мини-Бар'), 
-        (1, 'Кондиционер')
-    ]
-
+    room_number = models.CharField('Номер комнаты', max_length=10, blank=True, null=True)
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
+    
     minbar = models.BooleanField('Мини-Бар', default=True)
     conditioner = models.BooleanField('Кондиционер', default=True)
+    tv = models.BooleanField('Телевизор', default=True)
+    hairdryer = models.BooleanField("Фен", default = True)
+    safe = models.BooleanField("Сейф в номере", default = True)
+    Kettle_or_coffee_maker = models.BooleanField("Чайник или кофеварка", default = True)
+    Sound_insulation = models.BooleanField("Звукоизоляция", default = True)
+    Balcony_or_terrace = models.BooleanField("Балкон или терраса", default = True)
+    special_for_ivalid = models.BooleanField("Удобства для людей с ограниченными возможностями", default = True)
+    Telephone = models.BooleanField("Телефон", default = True)
+    Fridge = models.BooleanField("Холодильник", default = True)
+    Underfloor_heating = models.BooleanField("Пол с подогревом", default = True)
+    Work_facilities = models.BooleanField("Удобства для работы", default = True)
+    Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
 
     def __str__(self):
-        # Получаем человекочитаемое название типа комнаты
-        return f"{self.get_type_display()} (Отель: {self.hotel_id.name})"
+        room_num_display = f" №{self.room_number}" if self.room_number else ""
+        return f"{self.get_type_display()}{room_num_display} (Отель: {self.hotel_id.name})"
     
     class Meta:
         verbose_name = 'Комната'
@@ -74,7 +82,7 @@ class Clients(models.Model):
 
 class Reservations(models.Model):
     client_id = models.ForeignKey(Clients, on_delete=models.CASCADE, verbose_name='Клиент')
-    room_id = models.ForeignKey(Room, on_delete=models.CASCADE, verbose_name='Комната')
+    room_number = models.CharField('Номер комнаты', max_length=10)
     check_in_date = models.DateTimeField('Дата заезда')
     departure_date = models.DateTimeField('Дата выезда')
     total_amount = models.IntegerField('Общая сумма')

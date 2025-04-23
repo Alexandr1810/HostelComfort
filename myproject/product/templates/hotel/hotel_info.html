@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Комфорт Отель</title>
 </head>
 <body>
 	<div>
 		<h1>Комфорт Отель</h1>
 		<div>
-				{% if user.is_authenticated %}
-						<a href="{% url 'user_profile' %}">Профиль</a> |
-						<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
-							{% csrf_token %}
-							<button type="submit">Выйти</button>
-						</form>
-				{% else %}
-						<a href="{% url 'login' %}">Войти</a> |
-						<a href="{% url 'register' %}">Регистрация</a>
-				{% endif %}
+			{% if user.is_authenticated %}
+				<a href="{% url 'user_profile' %}">Профиль</a> |
+				<form action="{% url 'logout' %}?next={% url 'login' %}" method="post" style="display:inline;">
+					{% csrf_token %}
+					<button type="submit">Выйти</button>
+				</form>
+			{% else %}
+				<a href="{% url 'login' %}">Войти</a> |
+				<a href="{% url 'register' %}">Регистрация</a>
+			{% endif %}
 		</div>
-</div>
+	</div>
 	<div>
 		<div>Рейтинг: {{ hotel.rating }}</div> 
 		<div>Название отеля: {{ hotel.name }}</div>
@@ -35,28 +35,91 @@
 		<div>Об отеле</div>
 		{% for room in rooms %}
 			<div>Комната: {{ room.get_type_display }}</div>
-			{% if minbar and conditioner %}
-				<div>Дополнение: <br> {{ room.minbar }} <br> {{ room.conditioner }}</div>
-			{% endif %}
-				<div>Описание отеля: {{ hotel.description }}</div>
-				<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
+			<div>Дополнения:</div>
+			<ul>
+				{% if room.minbar %}
+					<li>Мини-Бар</li>
+				{% endif %}
+				{% if room.conditioner %}
+					<li>Кондиционер</li>
+				{% endif %}
+				{% if room.tv %}
+					<li>Телевизор</li>
+				{% endif %}
+				{% if room.hairdryer %}
+					<li>Фен</li>
+				{% endif %}
+				{% if room.safe %}
+					<li>Сейф в номере</li>
+				{% endif %}
+				{% if room.Kettle_or_coffee_maker %}
+					<li>Чайник или кофеварка</li>
+				{% endif %}
+				{% if room.Sound_insulation %}
+					<li>Звукоизоляция</li>
+				{% endif %}
+				{% if room.Balcony_or_terrace %}
+					<li>Балкон или терраса</li>
+				{% endif %}
+				{% if room.special_for_ivalid %}
+					<li>Удобства для людей с ограниченными возможностями</li>
+				{% endif %}
+				{% if room.Telephone %}
+					<li>Телефон</li>
+				{% endif %}
+				{% if room.Fridge %}
+					<li>Холодильник</li>
+				{% endif %}
+				{% if room.Underfloor_heating %}
+					<li>Пол с подогревом</li>
+				{% endif %}
+				{% if room.Work_facilities %}
+					<li>Удобства для работы</li>
+				{% endif %}
+				{% if room.Baby_cot_services %}
+					<li>Услуги по предоставлению детской кроватки</li>
+				{% endif %}
+			</ul>
 		{% endfor %}
-
+		<div>Описание отеля: {{ hotel.description }}</div>
+		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
 	</div>
 	<div>{{hotel.price}} руб/ночь</div>
 	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
 
-	<div>Отзывы</div>
 	<div>
-		<textarea placeholder="Напишите отзыв"></textarea>
-		<br>
-		<button>Отправить</button>
-	</div>
-	<div>
-		<h3>Комментарии</h3>
-		{% if user.is_authenticated and user.clients and comment%}
-				<div>{{ user.clients.phio }}</div>
+		<h2>Отзывы</h2>
+		{% if user.is_authenticated %}
+			<form method="post" action="">
+				{% csrf_token %}
+				<label for="estimation">Оценка (1-5):</label>
+				<select name="estimation" id="estimation">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5" selected>5</option>
+				</select>
+				<br>
+				<label for="comment">Комментарий:</label><br>
+				<textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+				<button type="submit">Отправить</button>
+			</form>
+		{% else %}
+			<p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить отзыв.</p>
 		{% endif %}
-</div>
+	</div>
+
+	<div>
+		<h3>Комментарии пользователей</h3>
+		{% for review in comments %}
+			<div>
+				<strong>{{ review.client_id.phio }}</strong> ({{ review.date|date:"d.m.Y H:i" }}) - Оценка: {{ review.estimation }}/5
+				<p>{{ review.comment }}</p>
+			</div>
+		{% empty %}
+			<p>Пока нет комментариев.</p>
+		{% endfor %}
+	</div>
 </body>
 </html>
