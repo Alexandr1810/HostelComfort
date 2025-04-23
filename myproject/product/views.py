@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from .models import Hotel, Room, Clients, Reservations, User
 from django.contrib import messages
@@ -93,3 +93,39 @@ def user_profile(request):
         'client': client,
         'reservations': reservations
     })
+
+def is_manager(user):
+    return user.role == 'manager'
+
+@login_required
+@user_passes_test(is_manager)
+def manager_dashboard(request):
+    hotels = Hotel.objects.all()
+    clients = Clients.objects.all()
+    return render(request, 'manager/dashboard.html', {
+        'hotels': hotels,
+        'clients': clients
+    })
+
+@login_required
+@user_passes_test(is_manager)
+def edit_hotel(request, id):
+    hotel = get_object_or_404(Hotel, id=id)
+    if request.method == 'POST':
+        # Логика обновления отеля
+        hotel.name = request.POST.get('name')
+        hotel.address = request.POST.get('address')
+        hotel.save()
+        return redirect('manager_dashboard')
+    return render(request, 'manager/edit_hotel.html', {'hotel': hotel})
+
+@login_required
+@user_passes_test(is_manager)
+def edit_client(request, id):
+    client = get_object_or_404(Clients, id=id)
+    if request.method == 'POST':
+        # Логика обновления клиента
+        client.phio = request.POST.get('phio')
+        client.phone = request.POST.get('phone')
+        client.save()
+        return redirect('manager_dashboard')
