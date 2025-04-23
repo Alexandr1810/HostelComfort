@@ -8,12 +8,6 @@
 <body>
 	<div>
 		<h1>Комфорт Отель</h1>
-<<<<<<< HEAD
-		<a href="">Логин /</a>
-		<a href="">Регистрация</a>
-	</div>
-
-=======
 		<div>
 				{% if user.is_authenticated %}
 						<a href="{% url 'user_profile' %}">Профиль</a> |
@@ -27,7 +21,6 @@
 				{% endif %}
 		</div>
 </div>
->>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
 	<div>
 		<div>Рейтинг: {{ hotel.rating }}</div> 
 		<div>Название отеля: {{ hotel.name }}</div>

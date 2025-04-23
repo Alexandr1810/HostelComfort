@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,28 @@
 		@font-face {
 			font-family: "tinkoff";
 
-			src: url("{% static 'css/fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
-			url("{% static 'css/fonts/tinkoffsans-medium.woff' %}") format('woff');
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
 		} 
 	</style>
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
 </head>
 <body>
-	<header style="background-image: url(https://cosmosgroup.ru/files/slider/85_1744637464.webp);">
+	<header id="bigHeader" style="background-image: url('../static/img/headerBackground.webp');">
 		<div class="mainHeader">
 			<div class="innerHeader">
-				<span>Комфорт Отель</span>
+				
+				<div class="logoBlock">
+					<span>Комфорт Отель</span>
+				</div>
 				<div class="loginBlock">
-					<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8(800)922-22-22</a>
+					<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
 					<a class="loginBlock-link" href="#">войти</a>
 				</div>
 			</div>
 			<div class="innerTextBlock">
-				<h1>Холдинг "Комфорт Отель"</h1>
+				<h1>Холдинг <span style=" color: #ffdd2d; ">Комфорт Отель</span></h1>
 				<h2>Севис бронирования отелей в Санкт-Петербурге</h2>
 			</div>
 		</div>
@@ -153,7 +157,7 @@
 						</div>
 						<div class="HostelBlock-TextBlock-add">
 							<span>от 13 900 ₽</span>
-							<a href="#"><button>Выбрать</button></a>
+							<a href="/hotel_frontend/"><button>Выбрать</button></a>
 						</div>
 					</div>
 				</div>
@@ -184,7 +188,7 @@
 						</div>
 						<div class="HostelBlock-TextBlock-add">
 							<span>от 4 499 ₽</span>
-							<a href="#"><button>Выбрать</button></a>
+							<a href="/hotel_frontend/"><button>Выбрать</button></a>
 						</div>
 					</div>
 				</div>
@@ -215,7 +219,7 @@
 						</div>
 						<div class="HostelBlock-TextBlock-add">
 							<span>от 7 000 ₽</span>
-							<a href="#"><button>Выбрать</button></a>
+							<a href="/hotel_frontend/"><button>Выбрать</button></a>
 						</div>
 					</div>
 				</div>
@@ -246,12 +250,24 @@
 						</div>
 						<div class="HostelBlock-TextBlock-add">
 							<span>6 700 ₽</span>
-							<a href="#"><button>Выбрать</button></a>
+							<!-- Нужно заменить на ссылки с id отеля -->
+							<a href="/hotel_frontend/"><button>Выбрать</button></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</content>
+	<footer class="footer">
+		<ul class="menu">
+		  <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+	
+		</ul>
+		<p>&copy;2021 Nadine Coelho | All Rights Reserved</p>
+	  </footer>
 </body>
 </html>

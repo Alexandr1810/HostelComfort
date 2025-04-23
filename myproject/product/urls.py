@@ -13,7 +13,7 @@ urlpatterns = [
     
     #frontend
     path('hotel/', views.hotel_1, name = 'hotel_1'),
-    path('hotel_frontend/', views.hotel_detail, name='hotel_detail_1'),
+    path('hotel_frontend/', views.hotel_detail_1, name='hotel_detail_1'),
     path('booking_frontend/', views.booking_1, name = 'booking_1'),
     path('booking_info_frontend/', views.booking_info_1, name = 'booking_info_1'),
     path('login_frontend/', views.user_login_1, name = 'login_1'),

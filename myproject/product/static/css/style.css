@@ -3,6 +3,7 @@
     margin: 0;
 
 }
+
 body{
     font-family: 'tinkoff',sans-serif; 
     background: #f6f7f8;
@@ -15,11 +16,21 @@ input{
     border-radius: 10px;
     font-size: 16px;
 }
-header {
+button{
+    background: #ffdd2d;
+    border-radius: 10px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+header#bigHeader {
     width: 99vw;
     height: 80vh;
     background-size: cover;
+    background-position-y: -55px;
 }
+
 .mainHeader{
     background-image: -webkit-linear-gradient(top, rgb(0 0 0 / 10%), rgb(255 255 255 / 10%));
     width: 90%;
@@ -103,12 +114,12 @@ header {
     max-height: fit-content;
 }
 .mainFilter h2{
-    font-size: 24px;
+    font-size: 26px;
     text-align: center;
     margin-bottom: 10px;
 }
 .mainFilter h3{
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
 }
 .filterBlock-elem{
@@ -140,6 +151,8 @@ header {
     align-items: center;
     cursor: pointer;
     width: 100%;
+    font-size: 18px;
+
 }
 /* Фиксированный размер чекбокса */
 .amenities-list input[type="checkbox"] {
@@ -179,11 +192,17 @@ header {
 .amenities-list span {
     flex-grow: 1;
 }
+.mainFilter button{
+    width: 60%;
+    height: 50px;
+    margin-left: 20%;
+    margin-top: 10px;
+}
 .HostelsBlock{
     width: 50vw;
 }
 .HostelsBlock-mainText {
-    font-size: 30px;
+    font-size: 36px;
     margin-bottom: 30px;
 }
 .HostelBlock{
@@ -201,6 +220,7 @@ header {
     overflow-x: auto;
     scrollbar-width: none;
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    border-radius: 10px;
 }
 
 .HostelBlock-imgBlock img{
@@ -217,6 +237,9 @@ header {
 .HostelBlock-imgBlock img:last-child {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+}
+.HostelBlock-TextBlock-main h2{
+    font-size: 26px;
 }
 .HostelBlock-TextBlock{
     display: flex;
@@ -250,16 +273,169 @@ header {
 
 .HostelBlock-TextBlock-add span{
     font-weight: 700;
-    font-size: 24px;
+    font-size: 26px;
 }
 .HostelBlock-TextBlock-add button{
-    background: #ffdd2d;
-    border-radius: 10px;
     margin-top: 10px;
-    height: 40px;
     width: 140px;
-    border: navajowhite;
-    cursor: pointer;
-    font-size: 16px;
 }
 
+
+
+
+
+.footer {
+    position: relative;
+    width: 99vw;
+    background: #ffffff;
+    min-height: 100px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  .social-icon,
+  .menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  
+  .social-icon__item,
+  .menu__item {
+    list-style: none;
+  }
+  
+  .social-icon__link {
+    font-size: 2rem;
+    color: #fff;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+  }
+  .social-icon__link:hover {
+    transform: translateY(-10px);
+  }
+  
+  .menu__link {
+    font-size: 1.2rem;
+    color: #000000;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+    text-decoration: none;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+  
+  .menu__link:hover {
+    opacity: 1;
+  }
+  
+  .footer p {
+    margin: 15px 0 10px 0;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+
+  /* Страница Отеля*/
+  header#classicHeader{
+    height: 70px;
+    background: white;
+    display: flex;
+    padding: 0 10%;
+    align-items: center;
+    justify-content: space-between;
+}
+header#classicHeader .logoblock{
+    display: flex;
+    align-items: center;
+}
+header#classicHeader .logoblock img{
+    height: 50px;
+}
+
+header#classicHeader .loginBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+}
+header#classicHeader .loginBlock-phone, header#classicHeader .loginBlock-link{
+    color: #313132 !important;
+}
+#mainHotel{
+    padding: 0 20%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+}
+.mainHotel-imageBlock {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    border-radius: 10px;
+}
+
+/* Скругляем углы у первого изображения */
+.mainHotel-imageBlock img:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+  
+/* Скругляем углы у последнего изображения */
+.mainHotel-imageBlock img:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.mainHotel-imageBlock img{
+    height: 100%;
+    margin-right: 10px;
+}
+.mainHotel-textBlockRaiting{
+    height: 20px;
+    display: flex;
+}
+.mainHotel-textBlockName{
+    font-size: 46px;
+}
+
+.mainHotel-textBlockContacts{
+    margin: 0 0 20px 0;
+    color: #313132;
+    font-size: 20px;
+}
+
+.mainHotel-textBlockContacts div{
+    margin-top: 5px;
+}
+.mainHotel-textBlockContacts img{
+    height: 20px;
+    vertical-align: text-top;
+    margin-right: 5px;
+}
+
+#aboutHotel{
+    margin: 20px 20%;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+}
+#aboutHotel label{
+    font-size: 19px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+#aboutHotel h1{
+    margin-bottom: 10px;
+}
