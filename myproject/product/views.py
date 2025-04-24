@@ -34,6 +34,16 @@ def hotel(request):
     }
     return render(request, 'hotel/index.html', context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def manager_profile(request):
+    return render(request, 'profile/manager.html')
+
+@login_required
+def manager_logout(request):
+    logout(request)
+    return redirect('manager_profile')
+
 
 
 def hotel_detail(request, id):
@@ -216,6 +226,28 @@ def register(request):
     
     return render(request, 'registration/register.html', {'form': form})
 
+@login_required
+def user_profile(request):
+    if request.user.is_superuser:
+        # Для суперпользователя можно вернуть пустой профиль или специальную страницу
+        client = None
+        reservations = []
+        return render(request, 'profile/manager.html', {
+            'client': client,
+            'reservations': reservations
+        })
+    else:
+        try:
+            client = request.user.clients  # Пытаемся получить связанного клиента
+        except ObjectDoesNotExist:
+            # Если клиент не существует, перенаправляем на заполнение профиля
+            return redirect('complete_profile')
+        reservations = Reservations.objects.filter(client_id=client)
+        return render(request, 'profile/user.html', {
+            'client': client,
+            'reservations': reservations
+        })
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
@@ -225,7 +257,10 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('user_profile')
+                if user.is_superuser:
+                    return redirect('hotel_manager')
+                else:
+                    return redirect('user_profile')
         messages.error(request, 'Неверный телефон/email или пароль')
     else:
         form = LoginForm()
@@ -276,20 +311,4 @@ def hotel_manager(request):
     }
     return render(request, 'hotel/hotel_manager.html', context)
 
-@login_required
-def user_profile(request):
-    if request.user.is_superuser:
-        # Для суперпользователя можно вернуть пустой профиль или специальную страницу
-        client = None
-        reservations = []
-    else:
-        try:
-            client = request.user.clients  # Пытаемся получить связанного клиента
-        except ObjectDoesNotExist:
-            # Если клиент не существует, перенаправляем на заполнение профиля
-            return redirect('complete_profile')
-        reservations = Reservations.objects.filter(client_id=client)
-    return render(request, 'profile/user.html', {
-        'client': client,
-        'reservations': reservations
-    })
+

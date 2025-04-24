@@ -10,7 +10,7 @@
 		<h1>Комфорт Отель</h1>
 		<div>
 			{% if user.is_authenticated %}
-				<a href="{% url 'user_profile' %}">Профиль</a> |
+				<a href="{% url 'manager_profile' %}">Профиль</a> |
 				<form action="{% url 'logout' %}?next={% url 'login' %}" method="post" style="display:inline;">
 					{% csrf_token %}
 					<button type="submit">Выйти</button>
@@ -33,6 +33,12 @@
     </div>
 
     <div>
+        {% if user.is_superuser %}
+            <a href="#"><button>Добавить отель</button></a>
+        {% endif %}
+    </div>
+
+    <div>
         {% if hotel %}
             {% for el in hotel %}
             <div style="margin: 20px; padding: 10px; border: 1px solid #ccc;">
@@ -49,6 +55,13 @@
                     <a href="{% url 'hotel_detail' el.id %}">
                         <button>Подробнее</button>
                     </a>
+                    {% if user.is_superuser %}
+                        <a href="#"><button>Изменить</button></a>
+                        <form action="#" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот отель?');">Удалить</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

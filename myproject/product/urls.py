@@ -12,4 +12,6 @@ urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
     path('manager_login/', views.manager_login, name='manager_login'),
     path('hotel_manager/', views.hotel_manager, name='hotel_manager'),
+    path('manager_profile/', views.manager_profile, name='manager_profile'),
+    path('manager_logout/', views.manager_logout, name='manager_logout'),
 ]

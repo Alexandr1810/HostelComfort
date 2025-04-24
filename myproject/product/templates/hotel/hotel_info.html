@@ -116,6 +116,12 @@
 			<div>
 				<strong>{{ review.client_id.phio }}</strong> ({{ review.date|date:"d.m.Y H:i" }}) - Оценка: {{ review.estimation }}/5
 				<p>{{ review.comment }}</p>
+                {% if user.is_superuser %}
+                    <form action="№" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?');">Удалить</button>
+                    </form>
+                {% endif %}
 			</div>
 		{% empty %}
 			<p>Пока нет комментариев.</p>
