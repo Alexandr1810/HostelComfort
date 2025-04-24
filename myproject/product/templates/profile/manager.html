@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+</head>
+<body>
+    <h1>Добро пожаловать, {{ client.phio }}!</h1>
+    
+    <h2>Ваши данные:</h2>
+    <p>Телефон: {{ client.phone }}</p>
+    <p>Email: {{ client.email }}</p>
+    <p>Паспорт: {{ client.passport_seria }} {{ client.passport_num }}</p>
+    
+    <h2>Ваши бронирования:</h2>
+    <ul>
+        {% for reservation in reservations %}
+            <li>
+                Отель: {{ reservation.room_id.hotel_id.name }}<br>
+                Комната: {{ reservation.room_id.get_type_display }}<br>
+                Даты: {{ reservation.check_in_date|date:"d.m.Y" }} - {{ reservation.departure_date|date:"d.m.Y" }}<br>
+                Сумма: {{ reservation.total_amount }} руб.
+            </li>
+        {% empty %}
+            <li>У вас нет активных бронирований</li>
+        {% endfor %}
+    </ul>
+
+		<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
+			{% csrf_token %}
+			<button type="submit">Выйти</button>
+		</form>
+
+		<a href="{% url 'hotel' %}"><button>Посмотреть отели</button></a>
+</body>
+</html>

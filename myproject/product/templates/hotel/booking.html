@@ -1,50 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Бронирование</title>
 </head>
 <body>
 	<div>
-		<h1>Комфорт Отель</h1>
+		<h1>Комфорт Отель - Бронирование</h1>
 		<div>
-				{% if user.is_authenticated %}
-						<a href="{% url 'user_profile' %}">Профиль</a> |
-						<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
-							{% csrf_token %}
-							<button type="submit">Выйти</button>
-						</form>
-				{% else %}
-						<a href="{% url 'login' %}">Войти</a> |
-						<a href="{% url 'register' %}">Регистрация</a>
-				{% endif %}
-		</div>
-</div>
-
-	<div> 
-		<div>
-			<h3>Выберите даты заезда в отель и выезда из отеля</h3>
-			<div>Дата заезда</div>
-			<input type="date">
-			<div>Дата выезда</div>
-			<input type="date">
-		</div>
-		<div>
-			<h3>Ваши данные</h3>
-			{% if user.is_authenticated and hotel %}
-					<div>
-						<p>Телефон: {{ hotel.contact_phone }}</p>
-						<p>Email: {{ hotel.email }}</p>
-					</div>
+			{% if user.is_authenticated %}
+				<a href="{% url 'user_profile' %}">Профиль</a> |
+				<form action="{% url 'logout' %}?next={% url 'login' %}" method="post" style="display:inline;">
+					{% csrf_token %}
+					<button type="submit">Выйти</button>
+				</form>
 			{% else %}
-					<div>Авторизируйтесь</div>
+				<a href="{% url 'login' %}">Войти</a> |
+				<a href="{% url 'register' %}">Регистрация</a>
 			{% endif %}
-
-		<div>
-			<div>К оплате сейчас: {{ hotel.price }} руб</div>
-			<a href="{% url 'booking_info' hotel.id%}"><button>Оплатить</button></a>
 		</div>
 	</div>
+
+	<h2>Бронирование отеля: {{ hotel.name }}</h2>
+
+	<form method="post" action="">
+		{% csrf_token %}
+
+		<label for="room_type">Тип комнаты:</label>
+		<select name="room_type" id="room_type">
+			<option value="">-- Все типы --</option>
+			<option value="0" {% if selected_room_type == '0' %}selected{% endif %}>Одноместный</option>
+			<option value="1" {% if selected_room_type == '1' %}selected{% endif %}>Двуместный</option>
+			<option value="2" {% if selected_room_type == '2' %}selected{% endif %}>Люкс</option>
+		</select>
+		<br><br>
+
+		<fieldset>
+			<legend>Удобства:</legend>
+			<label><input type="checkbox" name="minbar" {% if selected_amenities.minbar %}checked{% endif %}> Мини-Бар</label><br>
+			<label><input type="checkbox" name="conditioner" {% if selected_amenities.conditioner %}checked{% endif %}> Кондиционер</label><br>
+			<label><input type="checkbox" name="tv" {% if selected_amenities.tv %}checked{% endif %}> Телевизор</label><br>
+			<label><input type="checkbox" name="hairdryer" {% if selected_amenities.hairdryer %}checked{% endif %}> Фен</label><br>
+			<label><input type="checkbox" name="safe" {% if selected_amenities.safe %}checked{% endif %}> Сейф в номере</label><br>
+			<label><input type="checkbox" name="Kettle_or_coffee_maker" {% if selected_amenities.Kettle_or_coffee_maker %}checked{% endif %}> Чайник или кофеварка</label><br>
+			<label><input type="checkbox" name="Sound_insulation" {% if selected_amenities.Sound_insulation %}checked{% endif %}> Звукоизоляция</label><br>
+			<label><input type="checkbox" name="Balcony_or_terrace" {% if selected_amenities.Balcony_or_terrace %}checked{% endif %}> Балкон или терраса</label><br>
+			<label><input type="checkbox" name="special_for_ivalid" {% if selected_amenities.special_for_ivalid %}checked{% endif %}> Удобства для людей с ограниченными возможностями</label><br>
+			<label><input type="checkbox" name="Telephone" {% if selected_amenities.Telephone %}checked{% endif %}> Телефон</label><br>
+			<label><input type="checkbox" name="Fridge" {% if selected_amenities.Fridge %}checked{% endif %}> Холодильник</label><br>
+			<label><input type="checkbox" name="Underfloor_heating" {% if selected_amenities.Underfloor_heating %}checked{% endif %}> Пол с подогревом</label><br>
+			<label><input type="checkbox" name="Work_facilities" {% if selected_amenities.Work_facilities %}checked{% endif %}> Удобства для работы</label><br>
+			<label><input type="checkbox" name="Baby_cot_services" {% if selected_amenities.Baby_cot_services %}checked{% endif %}> Услуги по предоставлению детской кроватки</label><br>
+		</fieldset>
+		<br>
+
+		<label for="check_in_date">Дата заезда:</label>
+		<input type="date" id="check_in_date" name="check_in_date" value="{{ check_in_date }}" required />
+		<br><br>
+
+		<label for="departure_date">Дата выезда:</label>
+		<input type="date" id="departure_date" name="departure_date" value="{{ departure_date }}" required />
+		<br><br>
+
+		<label for="room_number">Номер комнаты:</label>
+		<select name="room_number" id="room_number" required>
+			<option value="">-- Выберите номер комнаты --</option>
+			{% for room in rooms %}
+				<option value="{{ room.room_number }}">{{ room.room_number }} ({{ room.get_type_display }})</option>
+			{% endfor %}
+		</select>
+		<br><br>
+
+		<button type="submit">Забронировать</button>
+	</form>
+
+	{% if messages %}
+		<ul>
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 </body>
 </html>

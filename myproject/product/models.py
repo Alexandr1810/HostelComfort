@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
@@ -116,3 +117,4 @@ class Reviews_and_ratings(models.Model):
     class Meta:
         verbose_name = 'Отзыв и оценка'
         verbose_name_plural = 'Отзывы и оценки'
+
