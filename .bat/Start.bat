@@ -19,7 +19,6 @@ goto download_python
 	bitsadmin /transfer download-python /download /priority high https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe %cd%\python-installer.exe
 	python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
 	del /f python-*.exe
-	py --version
 	goto download_git
 
 ::Готов
@@ -31,7 +30,7 @@ goto download_python
 	    echo.
 	    echo [ОШИБКА] Не удалось скачать установщик!
 	    echo - Доступ в интернет
-	    echo - Антивирус,сожет блокировать
+	    echo - Антивирус, может блокировать
 	    pause
 	    exit /b
 	)
@@ -49,12 +48,12 @@ goto download_python
 	    echo.
 	    echo [ОШИБКА] Git не установлен! Проверьте:
 	    echo - Доступ в интернет
-	    echo - Антивирус,сожет блокировать
+	    echo - Антивирус, может блокировать
 	)
 	goto git_clone
 
 :: Готов
-	:git_clone
+:git_clone
 	cd /d "%script_dir%"
 	git clone https://github.com/Alexandr1810/HostelComfort.git
 	goto create_venv
