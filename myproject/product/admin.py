@@ -11,10 +11,14 @@ class ClientsInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     inlines = (ClientsInline,)
 
+class HotelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address', 'contact_phone', 'email', 'rating')
+    fields = ('name', 'address', 'contact_phone', 'email', 'description', 'rating')
+
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Clients)
-admin.site.register(Hotel)
+admin.site.register(Hotel, HotelAdmin)
 admin.site.register(Room)
 admin.site.register(Reservations)
 admin.site.register(Reviews_and_ratings)

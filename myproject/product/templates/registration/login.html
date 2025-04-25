@@ -11,12 +11,6 @@
 <body>
     <div>
         <h2>Вход в систему</h2>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="error">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-        
         <form method="post">
             {% csrf_token %}
             <div class="form-group">

@@ -80,14 +80,14 @@
 					<li>Услуги по предоставлению детской кроватки</li>
 				{% endif %}
 			</ul>
-		{% endfor %}
+		</div>
 		<div>Описание отеля: {{ hotel.description }}</div>
 		<div>Контактный номер: {{ hotel.contact_phone }} <br> Наш email: {{ hotel.email }}</div>
-	</div>
-	<div>{{hotel.price}} руб/ночь</div>
-	<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
+		<div>{{ hotel.price }} руб/ночь</div>
+		<a href="{% url 'booking' hotel.id %}"><button>Забронированить</button></a>
+		{% endfor %}
+		<br>
 
-	<div>
 		<h2>Отзывы</h2>
 		{% if user.is_authenticated %}
 			<form method="post" action="">
@@ -117,10 +117,17 @@
 				<strong>{{ review.client_id.phio }}</strong> ({{ review.date|date:"d.m.Y H:i" }}) - Оценка: {{ review.estimation }}/5
 				<p>{{ review.comment }}</p>
                 {% if user.is_superuser %}
-                    <form action="№" method="post" style="display:inline;">
+                    <form action="{% url 'comment_delete' review.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?');">Удалить</button>
                     </form>
+                {% elif user.is_authenticated %}
+                    {% if review.client_id.user == user %}
+                        <form action="{% url 'comment_delete' review.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?');">Удалить</button>
+                        </form>
+                    {% endif %}
                 {% endif %}
 			</div>
 		{% empty %}

@@ -1,4 +1,5 @@
 from django import forms
+from .models import Hotel
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -17,3 +18,15 @@ class RegisterForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2',
                  'phio', 'phone', 'passport_seria', 'passport_num')
         
+class Add(forms.ModelForm):
+    class Meta:
+        model = Hotel
+        fields = ['name', 'address', 'contact_phone', 'email', 'description', 'rating']
+        labels = {
+            "name": "Имя",
+            "address": "Адрес",
+            "contact_phone": "Контактный номер",
+            "email": "Email",
+            "description": "Описание",
+            "rating": "Рейтинг",
+        }
