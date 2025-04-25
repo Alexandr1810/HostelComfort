@@ -107,17 +107,13 @@ def booking(request, id):
             filter_kwargs = {amenity: True}
             rooms = rooms.filter(**filter_kwargs)
 
-    # Filter out rooms that are already booked for the selected dates
+    # Фильтрация комнат, которые уже забронированы на выбранные даты
     if check_in_date and departure_date:
         check_in = parse_date(check_in_date)
         departure = parse_date(departure_date)
         if check_in and departure and check_in < departure:
-            overlapping_reservations = Reservations.objects.filter(
-                room_id__in=rooms,
-                check_in_date__lt=departure,
-                departure_date__gt=check_in
-            ).values_list('room_id', flat=True)
-            rooms = rooms.exclude(id__in=overlapping_reservations)
+            # Не исключаем комнаты, показываем все
+            pass
         else:
             messages.error(request, "Дата выезда должна быть позже даты заезда.")
 
@@ -225,17 +221,36 @@ def user_logout(request):
 @login_required
 def user_profile(request):
     if request.user.is_superuser:
-        # Для суперпользователя можно вернуть пустой профиль или специальную страницу
         client = None
         reservations = []
+        rooms = {}
     else:
         try:
-            client = request.user.clients  # Пытаемся получить связанного клиента
+            client = request.user.clients
         except ObjectDoesNotExist:
-            # Если клиент не существует, перенаправляем на заполнение профиля
             return redirect('complete_profile')
         reservations = Reservations.objects.filter(client_id=client)
+        # Получаем комнаты для бронирований
+        room_numbers = [r.room_number for r in reservations]
+        rooms_qs = Room.objects.filter(room_number__in=room_numbers)
+        rooms = {room.room_number: room for room in rooms_qs}
     return render(request, 'profile/user.html', {
         'client': client,
-        'reservations': reservations
+        'reservations': reservations,
+        'rooms': rooms
     })
+
+@login_required
+def cancel_booking(request, booking_id):
+    try:
+        reservation = Reservations.objects.get(id=booking_id, client_id=request.user.clients)
+    except Reservations.DoesNotExist:
+        messages.error(request, "Бронирование не найдено или у вас нет прав на его удаление.")
+        return redirect('user_profile')
+
+    if request.method == 'POST':
+        reservation.delete()
+        messages.success(request, "Бронирование успешно снято.")
+        return redirect('user_profile')
+
+    return render(request, 'profile/confirm_cancel.html', {'reservation': reservation})

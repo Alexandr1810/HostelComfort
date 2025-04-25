@@ -37,7 +37,7 @@ class Room(models.Model):
         (1, 'Двуместный'),
         (2, 'Люкс'),
     ]
-    room_number = models.CharField('Номер комнаты', max_length=10, blank=True, null=True)
+    room_number = models.IntegerField('Номер комнаты')
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
     
@@ -82,7 +82,7 @@ class Clients(models.Model):
 
 class Reservations(models.Model):
     client_id = models.ForeignKey(Clients, on_delete=models.CASCADE, verbose_name='Клиент')
-    room_number = models.CharField('Номер комнаты', max_length=10)
+    room_number = models.IntegerField('Номер комнаты')
     check_in_date = models.DateTimeField('Дата заезда')
     departure_date = models.DateTimeField('Дата выезда')
     total_amount = models.IntegerField('Общая сумма')
