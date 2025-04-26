@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    {% if user.is_superuser %}
+        <a href="{% url 'add' %}"><button>Добавить отель</button></a>
+    {% endif %}
+  </div>
+  <div>
+    {% if hotel %}
+        {% for el in hotel %}
+        <div style="margin: 20px; padding: 10px; border: 1px solid #ccc;">
+            <div>
+                <img src="/media/{{ el.image1|default:'default.jpg' }}" alt="Фото отеля" width="200">
+                <img src="/media/{{ el.image2|default:'default.jpg' }}" alt="Фото отеля" width="200">
+                <img src="/media/{{ el.image3|default:'default.jpg' }}" alt="Фото отеля" width="200">
+            </div>
+            <div>
+                <h3>{{ el.name }}</h3>
+                <p>Адрес: {{ el.address }}</p>
+                <p>Рейтинг: {{ el.rating }}/5</p>
+                {% if el.room_types %}
+                    <p>Цены от 
+                        {{ el.price }} руб/ночь
+                    </p>
+                {% else %}
+                    <p>Цена: Нет данных</p>
+                {% endif %}
+                <p>Типы комнат:
+                    {% if el.room_types %}
+                        {% for room_type in el.room_types %}
+                            {{ room_type }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Нет данных
+                    {% endif %}
+                </p>
+                <a href="{% url 'hotel_info' el.id %}">
+                    <button>Подробнее</button>
+                </a>
+                {% if user.is_superuser %}
+                    <form action="{% url 'delete' el.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот отель?');">Удалить</button>
+                    </form>
+                    <a href="{% url 'edit' el.id %}"><button type="button">Изменить</button></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Отели не найдены. Попробуйте изменить параметры поиска.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

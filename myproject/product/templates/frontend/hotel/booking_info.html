@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
+</head>
+<body >
+	<header id="classicHeader">
+		<div class="logoblock">
+			<img src="{% static 'img/icon-home.svg' %}" alt="">
+			<h1>
+				Комфорт Отель
+			</h1>
+		</div>
+		<div class="loginBlock">
+			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+			<a class="loginBlock-link" href="/hotel_frontend/">войти</a>
+		</div>
+	</header>
+	<content>
+		<section id="SuccsessBooking-Section">
+			<div class="SuccsessBooking">
+				<div class="SuccsessBooking-header">
+					<h1 class="SuccsessBooking-Title">Бронирование Успешно</h1>
+					<span class="SuccsessBooking-Id">№1975456</span>
+				</div>
+				<div class="SuccsessBooking-body">
+					<div class="SuccsessBooking-img">
+						<img src="{% static 'img/hotel1/rooms/room2/room2_1.jpeg' %}">
+						<img src="{% static 'img/hotel1/rooms/room2/room2_2.jpeg' %}">
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Palace Bridge Hotel</span>
+						<span class="SuccsessBooking-info-title">-</span>
+						<span class="SuccsessBooking-info-text">Двухместный номер Standard</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Дата заезда:</span>
+						<span class="SuccsessBooking-info-text">24.05.2024</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Дыта выезда:</span>
+						<span class="SuccsessBooking-info-text">26.05.2024</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Оплата:</span>
+						<span class="SuccsessBooking-info-text">7000 ₽</span>
+					</div>
+				</div>
+				<a href="/hotel/"><button>Готово</button></a>
+			</div>
+		</section>
+	</content>
+</body>
+</html>

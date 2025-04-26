@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Индекс</title>
+		
+		<style>
+			@font-face {
+				font-family: "tinkoff";
+	
+				src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+				url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+			} 
+		</style>
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
+	</head>
+	<body>
+		<header id="classicHeader">
+			<div class="logoblock">
+				<img src="{% static 'img/icon-home.svg' %}" alt="">
+				<h1>
+					Комфорт Отель
+				</h1>
+			</div>
+			<div class="loginBlock">
+		  <a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+		  {% if user.is_authenticated %}
+			<form class="loginBlock-link" method="post" action="{% url 'logout' %}?next={% url 'login' %}" >
+				{% csrf_token %}
+				<button type="submit">Выйти</button>
+			</form>
+		  {% else %}
+			<a class="loginBlock-link" href="{% url 'login' %}">войти</a>
+		  {% endif %}
+			</div>
+		</header>
+	<content>
+		<section class="profileSection">
+			<div class="profileSection-block">
+				<h2 class="sectionTitle">Личный кабинет</h2>
+				<div class="profileSection-info">
+					<input disabled type="text" value="{{ client.phio }}">
+					<input disabled type="tel" value="{{ client.phone }}">
+					<input disabled type="email" value="{{ client.email }}">
+				</div>
+			</div>
+		</section>
+		<section class="userBookingSection">
+			<div class="userBookingSection-block">
+				<h2 class="sectionTitle">Ваши бронирования</h2>
+
+				{% for reservation in reservations %}
+        		{% if reservations %}
+				<div class="userBookingSection-item">
+					<div class="SuccsessBooking-header">
+						<h1 class="SuccsessBooking-Title">{{ hotel.name }}</h1>
+						<span class="SuccsessBooking-Id">№{{ reservation.id }}</span>
+					</div>
+					<div class="SuccsessBooking-body">
+						<div class="SuccsessBooking-img">
+							<img src="{% static reservation.room_id.foto1 %}">
+							<img src="{% static reservation.room_id.foto2 %}">
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-text">{{reservation.room_id.room_name }}</span>
+						</div>
+            			<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Номер комнаты:</span>
+							<span class="SuccsessBooking-info-text">{{ reservation.room_id.room_number }}</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Дата заезда:</span>
+							<span class="SuccsessBooking-info-text">{{ reservation.check_in_date|date:"d.m.Y" }}</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Дата выезда:</span>
+							<span class="SuccsessBooking-info-text">{{ reservation.departure_date|date:"d.m.Y" }}</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Оплата:</span>
+							<span class="SuccsessBooking-info-text">{{ reservation.total_amount }} ₽</span>
+						</div>
+					</div>
+					<form method="post" action="{% url 'cancel_booking' reservation.id %}" onsubmit="return confirm('Вы уверены, что хотите снять бронирование?');">
+						{% csrf_token %}
+						<a href="/hotel/"><button>Отменить</button></a>
+					</form>
+				</div>
+				{% else %}
+					<p>У вас пока нет бронирований.</p>
+				{% endif %}
+					
+				{% endfor %}
+			</div>
+		</section>
+	</content>
+	{% include "footer.html" %}
+
+	</body>
+</html>

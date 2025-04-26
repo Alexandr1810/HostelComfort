@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  {% include "header.html" %}
+<body>
+	<content style="display: flex; justify-content: center;">
+		<div class="loginSection registerSection">
+			<h2>Регистрация</h2>
+			<div class="login_form"> 
+        <form method="post" action="">
+        {% csrf_token %}
+            {{ form.phio.label_tag }}<br>
+            {{ form.phio }}
+
+            {{ form.username.label_tag }}<br>
+            {{ form.username }}
+
+            {{ form.phone.label_tag }}<br>
+            {{ form.phone }}
+
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+
+            {{ form.password1.label_tag }}<br>
+            {{ form.password1 }}
+
+            {{ form.password2.label_tag }}<br>
+            {{ form.password2 }} 
+
+            <div class="login_form-pasport">
+              {{ form.passport_seria.label_tag }}<br>
+              {{ form.passport_seria }}
+
+              {{ form.passport_num.label_tag }}<br>
+              {{ form.passport_num }}
+            </div>
+          <br>
+          <button type="submit">Зарегистрироваться</button>
+        </form>
+      </div>  
+	</content>
+</body>
+</html>
