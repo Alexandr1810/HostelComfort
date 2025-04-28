@@ -26,10 +26,10 @@
 		</div>
 		<div class="loginBlock">
 			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
-			<a class="loginBlock-link" href="#">войти</a>
+			<a class="loginBlock-link" href="/hotel_frontend/">войти</a>
 		</div>
 	</header>
-	<content>
+	<content id="hotel_info-content">
 		<section id="mainHotel">
 			<div class="mainHotel-textBlock">
 				<div class="mainHotel-textBlockRaiting">
@@ -61,7 +61,7 @@
 			</div>
 		</section>
 		<section id="aboutHotel">
-			<h1>Об отеле</h1>
+			<h2 class="sectionTitle">Об отеле</h2>
 			<label>
 				В отеле есть конференц-зал. Бесплатный Wi-Fi доступен на всей территории.
 
@@ -70,18 +70,142 @@
 				Гости могут отдохнуть у крытого бассейна, посетить русскую баню и сауну, а также позаниматься в фитнес-центре. В массажных кабинетах и салонах красоты работают профессиональные массажисты и косметологи.
 			</label>
 		</section>
-		<section>
-			<div>Отзывы</div>
-			<div>
-				<textarea placeholder="Напишите отзыв"></textarea>
-				<br>
-				<button>Отправить</button>
+		<section id="roomsAndAmenities">
+			<div class="Rooms">
+				<h2 class="sectionTitle">Все номера</h2>
+				<div class="roomBlock">
+					<div class="aboutRoomText">
+						<h2 class="roomName">Одноместный номер Standard</h2>
+						<div class="roomAmenities"><span><span>•</span>Мини-Бар</span><span><span>•</span>Кондиционер</span><span><span>•</span>Телевизор</span><span><span>•</span>Звукоизоляция</span><span><span>•</span>Сейф в номере</span></div>
+						
+						<div class="roomPrice">
+							<span>5 000 ₽</span>
+							<a href="/booking_frontend/"><button>Выбрать</button></a>
+						</div>
+					</div>
+					<div class="roomImg-roomPrice">
+						<div class="roomImgs">
+							<img src="{% static 'img/hotel1/rooms/room1/room1_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room1/room1_2.jpeg' %}">
+						</div>
+					</div>
+				</div>
+				
+				<div class="roomBlock">
+					<div class="aboutRoomText">
+						<h2 class="roomName">Двухместный номер Standard</h2>
+						<div class="roomAmenities"><span><span>•</span>Мини-Бар</span><span><span>•</span>Кондиционер</span><span><span>•</span>Телевизор</span><span><span>•</span>Звукоизоляция</span><span><span>•</span>Сейф в номере</span><span><span>•</span>Фен</span></div>
+						
+						<div class="roomPrice">
+							<span>7 000 ₽</span>
+							<a href="/booking_frontend/"><button>Выбрать</button></a>
+						</div>
+					</div>
+					<div class="roomImg-roomPrice">
+						<div class="roomImgs">
+							<img src="{% static 'img/hotel1/rooms/room2/room2_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room2/room2_2.jpeg' %}">
+						</div>
+					</div>
+				</div>
+				
+				<div class="roomBlock">
+					<div class="aboutRoomText">
+						<h2 class="roomName">Двухместный номер Standard</h2>
+						<div class="roomAmenities"><span><span>•</span>Мини-Бар</span><span><span>•</span>Кондиционер</span><span><span>•</span>Телевизор</span><span><span>•</span>Звукоизоляция</span><span><span>•</span>Сейф в номере</span><span><span>•</span>Фен</span></div>
+						
+						<div class="roomPrice">
+							<span>7 000 ₽</span>
+							<a href="/booking_frontend/"><button>Выбрать</button></a>
+						</div>
+					</div>
+					<div class="roomImg-roomPrice">
+						<div class="roomImgs">
+							<img src="{% static 'img/hotel1/rooms/room3/room3_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room3/room3_2.jpeg' %}">
+						</div>
+					</div>
+				</div>
+				
+				<div class="roomBlock">
+					<div class="aboutRoomText">
+						<h2 class="roomName">Двухместный номер люкс</h2>
+						<div class="roomAmenities"><span><span>•</span>Мини-Бар</span><span><span>•</span>Кондиционер</span><span><span>•</span>Телевизор</span><span><span>•</span>Фен</span><span><span>•</span>Звукоизоляция</span><span><span>•</span>Сейф в номере</span><span><span>•</span>Чайник или кофеварка</span><span><span>•</span>Балкон или терраса</span></div>
+						
+						<div class="roomPrice">
+							<span>12 000 ₽</span>
+							<a href="/booking_frontend/"><button>Выбрать</button></a>
+						</div>
+					</div>
+					<div class="roomImg-roomPrice">
+						<div class="roomImgs">
+							<img src="{% static 'img/hotel1/rooms/room4/room4_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room4/room4_2.jpeg' %}">
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-				<h3>Комментарии</h3>
-				<div></div>
+			
+			<div class="Amenities">
+				<h2 class="sectionTitle">Удобства отеля</h2>
+				<div class="amenitiesBlock">
+					<label><span>✔</span>Мини-Бар</label>
+					<label><span>✔</span>Кондиционер</label>
+					<label><span>✔</span>Телевизор</label>
+					<label><span>✔</span>Фен</label>
+					<label><span>✔</span>Сейф в номере</label>
+					<label><span>✔</span>Чайник или кофеварка</label>
+					<label><span>✔</span>Звукоизоляция</label>
+					<label><span>✔</span>Балкон или терраса</label>
+				</div>
+			</div>
+		</section>
+		<section id="commentSection">
+			<div class="sendCommentBlock">
+				<h2>Оставить комментарий</h2>
+				<div class="sendCommentBlock-write">
+					<textarea placeholder="Напишите.."></textarea>
+					<button>Отправить</button>
+				</div>
+			</div>
+			<div class="CommentsBlock">
+				<h2 class="sectionTitle">Отзывы гостей</h2>
+				<!-- оценка 5,4 - Никидываем класс green в commentRaiting -->
+				<!-- оценка 3 - Никидываем класс yellow в commentRaiting -->
+				<!-- оценка 1,2 - Никидываем класс red в commentRaiting -->
+				<div class="commentBlock">
+					<div class="commentBlock-head"><h3 class="contentSender">Илья</h3>  <div class="commentInfo"> <span class="contentDate">24.04.2005</span> <div class="commentRaiting green"><span class="commentRaiting-text">5</span></div></div></div>
+					<p class="commentBlock-body">Бронировал номер на сутки. Обслуживающий персонал приветливый. Мебель нуждается в обновлении. Спа комплекс отличный!</p>
+				</div>
+				<div class="commentBlock">
+					<div class="commentBlock-head"><h3 class="contentSender">Кирилл</h3>  <div class="commentInfo"> <span class="contentDate">24.04.2005</span> <div class="commentRaiting yellow"><span class="commentRaiting-text">3</span></div></div></div>
+					<p class="commentBlock-body">Под кроватью почему то был бурят. В остальном всё ок.</p>
+				</div>
+				<div class="commentBlock">
+					<div class="commentBlock-head"><h3 class="contentSender">Сергей</h3>  <div class="commentInfo"> <span class="contentDate">24.04.2005</span> <div class="commentRaiting green"><span class="commentRaiting-text">4</span></div></div></div>
+					<p class="commentBlock-body">Все понравилось. Отдельно оценил бы шикарный СПА, особенно понравилось отбеливание....</p>
+				</div>
+				<div class="commentBlock">
+					<div class="commentBlock-head"><h3 class="contentSender">Кирилл</h3>  <div class="commentInfo"> <span class="contentDate">24.04.2005</span> <div class="commentRaiting red"><span class="commentRaiting-text">2</span></div></div></div>
+					<p class="commentBlock-body">Ужасный отель, ничего не понравилось.</p>
+				</div>
+				<div class="commentBlock">
+					<div class="commentBlock-head"><h3 class="contentSender">Александр</h3>  <div class="commentInfo"> <span class="contentDate">24.04.2005</span> <div class="commentRaiting red"><span class="commentRaiting-text">1</span></div></div></div>
+					<p class="commentBlock-body">Так и не доехал, самолет почему то прилетел в бурятию..</p>
+				</div>
 			</div>
 		</section>
 	</content>
+	
+	<footer class="footer">
+		<ul class="menu">
+		  <li class="menu__item"><a class="menu__link" href="#">Главная</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Команда</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">О компании</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Личный кабинет</a></li>
+	
+		</ul>
+		<p>&copy;2025 Designed by Rothaarige Bestia</p>
+	</footer>
 </body>
 </html>

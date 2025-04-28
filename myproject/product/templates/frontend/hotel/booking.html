@@ -1,34 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<div>
-		<h1>Комфорт Отель</h1>
-		<a href="">Логин /</a>
-		<a href="">Регистрация</a>
-	</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
 
-	<div> 
-		<div>
-			<div>Дата заезда</div>
-			<input type="date">
-			<div>Дата выезда</div>
-			<input type="date">
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
+</head>
+<body >
+	<header id="classicHeader">
+		<div class="logoblock">
+			<img src="{% static 'img/icon-home.svg' %}" alt="">
+			<h1>
+				Комфорт Отель
+			</h1>
 		</div>
-		<div>
-			<div>Контактная информация</div>
-			<input type="tel" placeholder="Номер телефона" required>
-			<br>
-			<input type="email" placeholder="email" required>
+		<div class="loginBlock">
+			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+			<a class="loginBlock-link" href="/hotel_frontend/">войти</a>
 		</div>
-		<div>
-			<div>К оплате сейчас:  руб</div>
-			<a href=""><button>Оплатить</button></a>
-		</div>
-	</div>
+	</header>
+	<content>
+		<section id="bookingForm-section">
+			<div class="bookingForm"> 
+				<h2 class="sectionTitle">Забронировать номер</h2>
+				<div class="bookingForm-date">
+					<div>
+						<div>Дата заезда</div>
+						<input type="date">
+					</div>
+					<div>
+						<div>Дата выезда</div>
+						<input type="date">
+					</div>
+				</div>
+				<div class="bookingForm-contacts">
+					<div>Контактная информация</div>
+					<input type="tel" placeholder="Номер телефона" required>
+					<br>
+					<input type="email" placeholder="email" required>
+				</div>
+				<div class="bookingForm-price">
+					<a href="/booking_info_frontend/"><button>Оплатить</button></a>
+					<div>К оплате сейчас:  7000 ₽</div>
+				</div>
+			</div>
+		</section>
+	</content>
+	
+    <script type="text/javascript" > //Маска для номера
+        window.addEventListener("DOMContentLoaded", function() {
+            [].forEach.call( document.querySelectorAll('input[type=tel]'), function(input) {
+            var keyCode;
+            function mask(event) {
+                this.selectionStart = this.selectionEnd = this.value.length;
+                this.value = this.value.replace("+7(88","+7(8");
+                this.value = this.value.replace("+7(89","+7(9");
+                event.keyCode && (keyCode = event.keyCode);
+                var pos = this.selectionStart;
+                if (pos < 3) event.preventDefault();
+                var matrix = "+7(___)___-__-__",
+                    i = 0,
+                    def = matrix.replace(/\D/g, ""),
+                    val = this.value.replace(/\D/g, ""),
+                    new_value = matrix.replace(/[_\d]/g, function(a) {
+                        return i < val.length ? val.charAt(i++) || def.charAt(i) : a
+                    });
+                i = new_value.indexOf("_");
+                if (i != -1) {
+                    i < 4 && (i = 3);
+                    new_value = new_value.slice(0, i)
+                }
+                var reg = matrix.substr(0, this.value.length).replace(/_+/g,
+                    function(a) {
+                        return "\\d{1," + a.length + "}"
+                    }).replace(/[+()]/g, "\\$&");
+                reg = new RegExp("^" + reg + "$");
+                if (!reg.test(this.value) || this.value.length < 4 || keyCode > 47 && keyCode < 58) this.value = new_value;
+                if (event.type == "blur" && this.value.length < 4)  this.value = ""
+            }
+
+            input.addEventListener("input", mask, false);
+            input.addEventListener("focus", mask, false);
+            // input.addEventListener("blur", mask, false);
+            input.addEventListener("keydown", mask, false)
+            input.addEventListener("click", mask, false)
+            // input.addEventListener("mousedown", ()=>{this.focus();}), false)
+
+        });
+                    // $('input[type=tel]').inputmask("+7 (999) 999-99-99");
+                    let timeoutId;
+                    $(".widget-place").change((e)=>{
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(()=>{
+                            $(".wpfFilterButton").click()
+                        }, 400);
+                    });
+                    var siteOpenTimestamp = getCookie("siteOpenTimestamp");
+                    if(siteOpenTimestamp==undefined || siteOpenTimestamp==""){
+                        siteOpenTimestamp = (new Date()).getTime();
+                        setCookie("siteOpenTimestamp",siteOpenTimestamp);
+                    }else{
+                        siteOpenTimestamp = parseInt(siteOpenTimestamp);
+                    }
+                
+                    var timer = setInterval(function(){
+                        var currentTimestamp = (new Date()).getTime();
+                        if(
+                            (currentTimestamp-siteOpenTimestamp)>30000
+                        ){
+                            $("#cantChooiseModal").modal("show");
+                            clearInterval(timer);
+                            setCookie("siteOpenTimestamp","");
+                        }
+                    },1000);
+                });
+                function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            var items = location.search.substr(1).split("&");
+            for (var index = 0; index < items.length; index++) {
+                tmp = items[index].split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            }
+            return result;
+        }
+    </script>
 </body>
 </html>

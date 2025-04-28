@@ -1,38 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
 </head>
 <body>
-	<div>Личный кабинет</div>
-	<div>
-		<div>
-			<div>Вывести ФИО</div>
-			<div>Вывести номера телефона</div>
-			<div>Вывести email</div>
-			<div>Вывести id</div>
+	<header id="classicHeader">
+		<div class="logoblock">
+			<img src="{% static 'img/icon-home.svg' %}" alt="">
+			<h1>
+				Комфорт Отель
+			</h1>
 		</div>
-	</div>
-	<div>Бронирования</div>
-	<div>
-		<div>
-			<div>Вывести название отеля 1</div>
-			<div>Вывести название номера</div>
+		<div class="loginBlock">
+			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+			<a class="loginBlock-link" href="#">войти</a>
 		</div>
-		<div>
-			<img src="image1.jpg" alt="image1">
-			<img src="image1.jpg" alt="image1">
-		</div>
-		<div>
-			<div>Вывести дата заезда</div>
-			<div>Вывести дата выезда</div>
-		</div>
-		<div> 
-			<div>Вывести цену</div>
-			<button>Отменить</button>
-		</div>
-	</div>
-</body>
+	</header>
+	<content>
+		<section class="profileSection">
+			<div class="profileSection-block">
+				<h2 class="sectionTitle">Личный кабинет</h2>
+				<div class="profileSection-info">
+					<input disabled type="text" value="Иванов Иван Иванович">
+					<input disabled type="tel" value="79233024909">
+					<input disabled type="email" value="ivanovVanya@mail.ru">
+				</div>
+			</div>
+		</section>
+		<section class="userBookingSection">
+			<div class="userBookingSection-block">
+				<h2 class="sectionTitle">Ваши бронирования</h2>
+				<div class="userBookingSection-item">
+					<div class="SuccsessBooking-header">
+						<h1 class="SuccsessBooking-Title">Palace Bridge Hotel</h1>
+						<span class="SuccsessBooking-Id">№1975456</span>
+					</div>
+					<div class="SuccsessBooking-body">
+						<div class="SuccsessBooking-img">
+							<img src="{% static 'img/hotel1/rooms/room2/room2_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room2/room2_2.jpeg' %}">
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-text">Двухместный номер Standard</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Дата заезда:</span>
+							<span class="SuccsessBooking-info-text">24.05.2024</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Дыта выезда:</span>
+							<span class="SuccsessBooking-info-text">26.05.2024</span>
+						</div>
+						<div class="SuccsessBooking-info">
+							<span class="SuccsessBooking-info-title">Оплата:</span>
+							<span class="SuccsessBooking-info-text">7000 ₽</span>
+						</div>
+					</div>
+					<a href="/hotel/"><button>Отменить</button></a>
+				</div>
+			</div>
+		</section>
+	</content>
+	<footer class="footer">
+		<ul class="menu">
+		  <li class="menu__item"><a class="menu__link" href="#">Главная</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Команда</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">О компании</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Личный кабинет</a></li>
+	
+		</ul>
+		<p>&copy;2025 Designed by Rothaarige Bestia</p>
+	</footer>
+	</body>
 </html>

@@ -120,7 +120,7 @@ def register_1(request):
     else:
         form = RegisterForm()
     
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'frontend/registration/register.html', {'form': form})
 
 def user_login_1(request):
     if request.method == 'POST':
@@ -135,21 +135,12 @@ def user_login_1(request):
         messages.error(request, 'Неверный телефон/email или пароль')
     else:
         form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'frontend/registration/login.html', {'form': form})
 
 def user_logout_1(request):
     logout(request)
     return redirect('login')
 
-@login_required
 def user_profile_1(request):
-    try:
-        client = request.user.clients  # Пытаемся получить связанного клиента
-    except ObjectDoesNotExist:
-        # Если клиент не существует, перенаправляем на заполнение профиля
-        return redirect('complete_profile')
-    reservations = Reservations.objects.filter(client_id=client)
-    return render(request, 'profile/user.html', {
-        'client': client,
-        'reservations': reservations
-    })
+    return render(request, 'frontend/profile/user.html')
+
