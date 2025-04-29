@@ -180,7 +180,7 @@ def booking(request, id, room_number=None):
                             departure_date=departure,
                             total_amount=room.price * (departure - check_in).days,
                         )
-                        return redirect('hotel_info', id=hotel.id)
+                        return redirect('booking_info', id=hotel.id)
                     else:
                         booking_conflict = True
             except ValueError:
@@ -199,17 +199,19 @@ def booking_info(request, id, room_number=None):
     hotel = get_object_or_404(Hotel, id=id)
     room = None
     reservation = None
+    
     if room_number:
-        try:
-            room = Room.objects.get(hotel_id=hotel.id, room_number=room_number)
-        except Room.DoesNotExist:
-            room = None
-    if room and request.user.is_authenticated:
-        try:
-            client = request.user.clients
-            reservation = Reservations.objects.filter(client_id=client, room_id=room).latest('check_in_date')
-        except (Reservations.DoesNotExist, AttributeError):
-            reservation = None
+        room = get_object_or_404(Room, hotel_id=hotel.id, room_number=room_number)
+        if request.user.is_authenticated:
+            try:
+                client = request.user.clients
+                reservation = Reservations.objects.filter(
+                    client_id=client, 
+                    room_id=room
+                ).latest('check_in_date')
+            except (Reservations.DoesNotExist, AttributeError):
+                pass
+    
     context = {
         'hotel': hotel,
         'room': room,
@@ -217,12 +219,11 @@ def booking_info(request, id, room_number=None):
     }
     return render(request, 'hotel/booking_info.html', context)
   
-# папка Registration
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form
+            user = form.save()  # Сохраняем пользователя
             Clients.objects.create(
                 user=user,
                 phio=form.cleaned_data['phio'],
@@ -232,12 +233,9 @@ def register(request):
                 passport_num=form.cleaned_data['passport_num']
             )
             login(request, user)
-            return redirect('hotel') # Перенаправляем на главную страницу
+            return redirect('hotel')
         else:
-            # Добавляем сообщения об ошибках
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            messages.error(request, "Ошибка регистрации: " + str(form.errors))
     else:
         form = RegisterForm()
     return render(request, 'registration/register.html', {'form': form})

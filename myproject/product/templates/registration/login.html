@@ -5,13 +5,7 @@
   {% include "header.html" %}s
 	<content style="display: flex; justify-content: center;">
 		<div class="loginSection">
-			<h2>Вход</h2>
-			{% if messages %}
-				{% for message in messages %}
-					<div class="error">{{ message }}</div>
-				{% endfor %}
-			{% endif %}
-			
+			<h2>Вход</h2>		
 			<form method="post" class="login_form">
 				{% csrf_token %}
 				<div class="form-group">

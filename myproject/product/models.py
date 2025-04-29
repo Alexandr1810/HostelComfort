@@ -18,6 +18,11 @@ class Hotel(models.Model):
     email = models.CharField('Email', max_length=100)
     description = models.CharField('Описание', max_length=100)
     rating = models.IntegerField(choices=RATING_CHOICES)
+    foto1 = models.ImageField('Фото1')
+    foto2 = models.ImageField('Фото2')
+    foto3 = models.ImageField('Фото3')
+    foto4 = models.ImageField('Фото4')
+    foto5 = models.ImageField('Фото5')
 
     def __str__(self):
         return self.name
@@ -32,6 +37,7 @@ class Room(models.Model):
         (1, 'Двуместный'),
         (2, 'Люкс'),
     ]
+    room_name = models.CharField('Название отеля', max_length=50)
     room_number = models.IntegerField('Номер комнаты')
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
@@ -50,6 +56,8 @@ class Room(models.Model):
     Work_facilities = models.BooleanField("Удобства для работы", default = True)
     Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
     price = models.IntegerField('Цена')
+    foto1 = models.ImageField('Фото1')
+    foto2 = models.ImageField('Фото2')
 
     def __str__(self):
         room_num_display = f" №{self.room_number}" if self.room_number else ""
