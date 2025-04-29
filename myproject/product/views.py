@@ -162,25 +162,6 @@ def booking(request, id, room_number=None):
     date_error = False
     booking_conflict = False
     reservation = None
-    
-@login_required
-def booking(request, id, room_number=None):
-    hotel = get_object_or_404(Hotel, id=id)
-    client = None
-    try:
-        client = request.user.clients
-    except User.clients.RelatedObjectDoesNotExist:
-        return HttpResponseForbidden("Профиль клиента не найден. Пожалуйста, заполните профиль.")
-    room = None
-    if room_number:
-        try:
-            room = Room.objects.get(room_number=room_number, hotel_id=hotel.id)
-        except Room.DoesNotExist:
-            messages.error(request, f"Комната с номером {room_number} не найдена.")
-            return redirect('hotel_info', id=hotel.id)
-    date_error = False
-    booking_conflict = False
-    reservation = None
     if request.method == 'POST':
         check_in_date = request.POST.get('check_in_date')
         departure_date = request.POST.get('departure_date') 
@@ -262,7 +243,7 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form
+            user = form.save()  # Сохраняем пользователя
             Clients.objects.create(
                 user=user,
                 phio=form.cleaned_data['phio'],
@@ -272,7 +253,7 @@ def register(request):
                 passport_num=form.cleaned_data['passport_num']
             )
             login(request, user)
-            return redirect('hotel') # Перенаправляем на главную страницу
+            return redirect('login')  # Перенаправляем на главную страницу
         else:
             # Добавляем сообщения об ошибках
             for field, errors in form.errors.items():

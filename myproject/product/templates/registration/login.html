@@ -35,14 +35,8 @@
 	</header>
 	<content style="display: flex; justify-content: center;">
 		<div class="loginSection">
-			<h2>Вход</h2>
-			{% if messages %}
-				{% for message in messages %}
-					<div class="error">{{ message }}</div>
-				{% endfor %}
-			{% endif %}
-			
-			<form method="post" class="login_form">
+			<h2>Вход</h2>	
+			<form method="post" class="login_form" action="">
 				{% csrf_token %}
 				<div class="form-group">
 					{{ form.username.label_tag }}
