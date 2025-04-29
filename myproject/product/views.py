@@ -144,93 +144,53 @@ def hotel_info(request, id):
     }
     return render(request, 'hotel/hotel_info.html', context)
 
+
 @login_required
 def booking(request, id, room_number=None):
     hotel = get_object_or_404(Hotel, id=id)
-    client = None
-    try:
-        client = request.user.clients
-    except User.clients.RelatedObjectDoesNotExist:
-        return HttpResponseForbidden("Профиль клиента не найден. Пожалуйста, заполните профиль.")
-    room = None
-    if room_number:
-        try:
-            room = Room.objects.get(room_number=room_number, hotel_id=hotel.id)
-        except Room.DoesNotExist:
-            messages.error(request, f"Комната с номером {room_number} не найдена.")
-            return redirect('hotel_info', id=hotel.id)
-    date_error = False
-    booking_conflict = False
-    reservation = None
+    client = request.user.clients
+    room = get_object_or_404(Room, room_number=room_number, hotel_id=hotel.id)
     
-@login_required
-def booking(request, id, room_number=None):
-    hotel = get_object_or_404(Hotel, id=id)
-    client = None
-    try:
-        client = request.user.clients
-    except User.clients.RelatedObjectDoesNotExist:
-        return HttpResponseForbidden("Профиль клиента не найден. Пожалуйста, заполните профиль.")
-    room = None
-    if room_number:
-        try:
-            room = Room.objects.get(room_number=room_number, hotel_id=hotel.id)
-        except Room.DoesNotExist:
-            messages.error(request, f"Комната с номером {room_number} не найдена.")
-            return redirect('hotel_info', id=hotel.id)
     date_error = False
     booking_conflict = False
-    reservation = None
+
     if request.method == 'POST':
         check_in_date = request.POST.get('check_in_date')
-        departure_date = request.POST.get('departure_date') 
-        if check_in_date and departure_date and room:
+        departure_date = request.POST.get('departure_date')
+        
+        if check_in_date and departure_date:
             try:
                 check_in = timezone.datetime.strptime(check_in_date, '%Y-%m-%d').date()
-                departure = timezone.datetime.strptime(departure_date, '%Y-%m-%d').date()         
-                # Проверка что дата выезда не раньше даты заезда
+                departure = timezone.datetime.strptime(departure_date, '%Y-%m-%d').date()
+                
                 if departure <= check_in:
                     date_error = True
                 else:
-                    # Проверка доступности только для конкретного номера
-                    overlapping_reservations = Reservations.objects.filter(
-                        room_id=room,  # Ключевое изменение - проверяем только текущий номер
+                    # Проверка доступности номера
+                    if not Reservations.objects.filter(
+                        room_id=room,
                         check_in_date__lt=departure,
                         departure_date__gt=check_in
-                    ).exists()           
-                    if overlapping_reservations:
-                        booking_conflict = True
-                    else:
-                        # Если все проверки пройдены, создаем бронирование
-                        nights = (departure - check_in).days
-                        total_amount = room.price * nights
+                    ).exists():
+                        # Создаем бронирование без оплаты
                         Reservations.objects.create(
                             client_id=client,
                             room_id=room,
                             check_in_date=check_in,
                             departure_date=departure,
-                            total_amount=total_amount
+                            total_amount=room.price * (departure - check_in).days,
                         )
-                        messages.success(request, f"Комната №{room.room_number} успешно забронирована.")
-                        # Redirect to booking_info with room_number parameter
-                        return redirect('booking_info', id=hotel.id, room_number=room.room_number)
+                        return redirect('hotel_info', id=hotel.id)
+                    else:
+                        booking_conflict = True
             except ValueError:
                 messages.error(request, "Неверный формат даты.")
-        else:
-            messages.error(request, "Пожалуйста, заполните все поля.")
-    # Retrieve existing reservation for this client and room if any
-    try:
-        reservation = Reservations.objects.filter(client_id=client, room_id=room).latest('check_in_date')
-    except Reservations.DoesNotExist:
-        reservation = None
+
     context = {
         'hotel': hotel,
         'room': room,
-        'check_in_date': request.POST.get('check_in_date', ''),
-        'departure_date': request.POST.get('departure_date', ''),
         'date_error': date_error,
         'booking_conflict': booking_conflict,
-        'reservation': reservation,
     }
     return render(request, 'hotel/booking.html', context)
 

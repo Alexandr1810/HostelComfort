@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Индекс</title>
-	{% load static %}
-	<style>
-		@font-face {
-			font-family: "tinkoff";
 
-			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
-			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
-		} 
-	</style>
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
-</head>
-<body >
-	<header id="classicHeader">
-		<div class="logoblock">
-			<img src="{% static 'img/icon-home.svg' %}" alt="">
-			<h1>
-				Комфорт Отель
-			</h1>
-		</div>
-		<div class="loginBlock">
-			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
-      {% if user.is_authenticated %}
-        <a class="loginBlock-profile" href="{% url 'user_profile' %}">профиль</a>
-      {% else %}
-        <a class="loginBlock-link" href="{% url 'login' %}">войти</a>
-      {% endif %}
-		</div>
-	</header>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  {% include "header.html" %}
 
   {% if date_error %}
   <div class="error-message">
@@ -55,23 +25,23 @@
                         {% csrf_token %}
                         <div class="bookingForm-date">
                             <div class="div50">
-                                <div>Дата заезда</div>
-                                <input type="date">
+                                <div for="check_in_date">Дата заезда</div>
+                                <input type="date" id="check_in_date" name="check_in_date">
                             </div>
                             <div class="div50">
-                                <div>Дата выезда</div>
-                                <input type="date">
+                                <div for="departure_date">Дата выезда</div>
+                                <input type="date" id="departure_date" name="departure_date">
                             </div>
                         </div>
                         <div class="bookingForm-contacts">
                             <div>Контактная информация</div>
-                            <input type="tel" placeholder="Номер телефона" required>
+                            <input type="tel" placeholder="Номер телефона" value="{{ client.phio }}">
                             <br>
-                            <input type="email" placeholder="email" required>
+                            <input type="email" placeholder="email" value="{{ client.email }}">
                         </div>
                         <div class="bookingForm-price" >
-                            <a href="/booking_info_frontend/"><button>Оплатить</button></a>
-                            <div style=" width: auto; ">К оплате сейчас:  7000 ₽</div>
+                            <button type="submit">Оплатить</button>
+                            <div style=" width: auto; ">К оплате сейчас:  {{ room.price }} ₽</div>
                         </div>
                     </form>
                 </div>

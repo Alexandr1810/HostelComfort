@@ -217,7 +217,6 @@ header#bigHeader {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    max-height: 300px;
     height: 20%;
 }
 
@@ -249,8 +248,9 @@ header#bigHeader {
     font-size: 26px;
 }
 .HostelBlock-TextBlock{
+    margin-top: 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
@@ -272,7 +272,7 @@ header#bigHeader {
 }
 
 .HostelBlock-TextBlock-add{
-    height: 0px;
+    height: auto;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -587,8 +587,8 @@ header#classicHeader .loginBlock-phone:hover, header#classicHeader .loginBlock-l
 .roomPrice{
     display: flex;
     flex-direction: column;
-    height: 60%;
     justify-content: flex-end;
+    margin-top: 10%;
 }
 .roomPrice span{
     font-size: 24px;
@@ -785,9 +785,19 @@ div.login_form{
 .login_form-pasport{
     display: flex;
     justify-content: space-around;
+    width: 109%;
+
 }
 .login_form-pasport input{
     width: 50%;
+}
+
+.registerSection .login_form form input{
+    margin: 10px 5px;
+    width: 100%;
+}
+.registerSection .login_form form button{
+    width: 109%;
 }
 /*Страница профиля*/
 .profileSection{
@@ -832,4 +842,5 @@ div.login_form{
     width: 100%;
     padding: 20px;
     border-radius: 30px;
+    margin-bottom: 20px;
 }
