@@ -3,21 +3,18 @@ from . import views
 
 urlpatterns = [
     path('', views.hotel, name='hotel'),
-    path('hotel/<int:id>/', views.hotel_detail, name='hotel_detail'),
+    path('hotel/<int:id>/', views.hotel_info, name='hotel_info'),
     path('booking/<int:id>/', views.booking, name='booking'),
+    path('booking/<int:id>/<int:room_number>/', views.booking, name='booking'),
     path('booking_info/<int:id>/', views.booking_info, name='booking_info'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('register/', views.register, name='register'),
     path('profile/', views.user_profile, name='user_profile'),
-    
-    #frontend
-    path('hotel/', views.hotel_1, name = 'hotel_1'),
-    path('hotel_frontend/', views.hotel_detail_1, name='hotel_detail_1'),
-    path('booking_frontend/', views.booking_1, name = 'booking_1'),
-    path('booking_info_frontend/', views.booking_info_1, name = 'booking_info_1'),
-    path('login_frontend/', views.user_login_1, name = 'login_1'),
-    path('logout_frontend/', views.user_logout_1, name='user_login_1'),
-    path('register_frontend/', views.register_1, name = 'register_1'),
-    path('profile_frontend/', views.user_profile_1, name = 'user_profile_1'),
+    path('add/', views.add, name='add'),
+    path('delete/<int:id>/', views.delete, name='delete'),
+    path('edit/<int:id>/', views.edit, name='edit'),
+    path('comment_delete/<int:id>/', views.comment_delete, name='comment_delete'),
+    path('cancel_booking/<int:booking_id>/', views.cancel_booking, name='cancel_booking'),
+    path('hotel/<int:hotel_id>/room/<int:room_number>/edit/', views.edit_room, name='edit_room'),
 ]

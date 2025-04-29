@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,3 +44,74 @@
 	<button type="submit">Зарегистрироваться</button>
 </form>
 >>>>>>> ec21fd3f5b4b67e386a4fb090478e03e638ca386
+=======
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
+</head>
+<body>
+	<header id="classicHeader">
+		<div class="logoblock">
+			<img src="{% static 'img/icon-home.svg' %}" alt="">
+			<h1>
+				Комфорт Отель
+			</h1>
+		</div>
+		<div class="loginBlock">
+			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+      {% if user.is_authenticated %}
+        <a class="loginBlock-profile" href="{% url 'user_profile' %}">профиль</a>
+      {% else %}
+        <a class="loginBlock-link" href="{% url 'login' %}">войти</a>
+      {% endif %}
+		</div>
+	</header>
+	<content style="display: flex; justify-content: center;">
+		<div class="loginSection registerSection">
+			<h2>Регистрация</h2>
+			<div class="login_form"> 
+        <form method="post">
+        {% csrf_token %}
+          <input type="text" placeholder="ФИО" required>
+          <br>
+          <input type="tel" placeholder="Номер телефона" required> 
+          <br>
+          <input type="email" placeholder="email" required>
+          <br>
+          <input type="password" placeholder="Пароль" required>
+          <br>
+          <input type="password" placeholder="Повтор пароля" required>
+          <br>
+          <div class="login_form-pasport">
+            <input type="number" placeholder="Серия паспорта" required style="margin-right: 5%;">
+            <input type="number" placeholder="Номер паспорта" required>
+          </div>
+          <br>
+          <label for="">Дата рождения</label>
+          <input type="date" placeholder="Дата рождения" required>
+          
+          <button type="submit">Зарегистрироваться</button>
+        </form>
+			</div>
+			<p>Уже есть аккаунт? <a href="{% url 'login' %}">Вход</a></p>
+		</div>
+		
+	</div>
+	</content>
+</body>
+</html>
+>>>>>>> df0938ba4b29801df2db51b2c3eae375cd29c91c

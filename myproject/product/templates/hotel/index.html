@@ -3,56 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Комфорт Отель</title>
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
 </head>
 <body>
-    <div>
-        <h1>Комфорт Отель</h1>
-        <div>
-            {% if user.is_authenticated %}
-						    <a href="{% url 'user_profile' %}">Профиль</a> |
-								<form action="{% url 'logout' %}?next={% url 'login' %}" method="post">
-									{% csrf_token %}
-									<button type="submit">Выйти</button>
-								</form>
-            {% else %}
-                <a href="{% url 'login' %}">Войти</a> |
-                <a href="{% url 'register' %}">Регистрация</a>
-            {% endif %}
-        </div>
-    </div>
+	<header id="bigHeader" style="background-image: url('../static/img/headerBackground.webp');">
+		<div class="mainHeader">
+			<div class="innerHeader">
+				
+				<div class="logoBlock">
+					<span>Комфорт Отель</span>
+				</div>
+				<div class="loginBlock">
+					<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+					{% if user.is_authenticated %}
+						<a class="loginBlock-link" href="{% url 'user_profile' %}">профиль</a>
+					{% else %}
+						<a class="loginBlock-link" href="{% url 'login' %}">войти</a>>
+					{% endif %}
+				</div>
+			</div>
+			<div class="innerTextBlock">
+				<h1>Холдинг <span style=" color: #ffdd2d; ">Комфорт Отель</span></h1>
+				<h2>Севис бронирования отелей в Санкт-Петербурге</h2>
+			</div>
+		</div>
+	</header>
+	<content>
+		
+		<section class="Hostels_and_Filter_Block">
+			<div class="mainFilter">
+				<h2>Популярные фильтры</h2>
+				<div class="filterBlock-elem">
+					<form method="get" action="{% url 'hotel' %}">
+						<h3>По цене</h3>
+						<div class="filterBlock-elem-input priceInput-block">
+							<input type="text" name="min_price" class="priceInput" placeholder="От" value="{{ min_price|default_if_none:'' }}">
+							<input type="text" name="max_price" class="priceInput" placeholder="До" value="{{ max_price|default_if_none:'' }}">
+						</div>
+					</div>
+					<div class="filterBlock-elem">
+						<h3>В номере</h3>
+						<div class="filterBlock-elem-input">
+							<ul class="amenities-list">
+								<li>
+									<label>
+										<input type="checkbox" name="minbar" {% if selected_amenities.minbar %}checked{% endif %}> Мини-Бар
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="conditioner" {% if selected_amenities.conditioner %}checked{% endif %}> Кондиционер
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="television" {% if selected_amenities.television %}checked{% endif %}> Телевизор
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="hairdryer" {% if selected_amenities.hairdryer %}checked{% endif %}> Фен
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="safe" {% if selected_amenities.safe %}checked{% endif %}> Сейф в номере
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Kettle_or_coffee_maker" {% if selected_amenities.Kettle_or_coffee_maker %}checked{% endif %}> Чайник или кофеварка
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Sound_insulation" {% if selected_amenities.Sound_insulation %}checked{% endif %}> Звукоизоляция
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Balcony_or_terrace" {% if selected_amenities.Balcony_or_terrace %}checked{% endif %}> Балкон или терраса
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="special_for_ivalid" {% if selected_amenities.special_for_ivalid %}checked{% endif %}> Удобства для людей с ограниченными возможностями
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Telephone" {% if selected_amenities.Telephone %}checked{% endif %}> Телефон
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Fridge" {% if selected_amenities.Fridge %}checked{% endif %}> Холодильник
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Underfloor_heating" {% if selected_amenities.Underfloor_heating %}checked{% endif %}> Пол с подогревом
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Work_facilities" {% if selected_amenities.Work_facilities %}checked{% endif %}> Удобства для работы
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="Baby_cot_services" {% if selected_amenities.Baby_cot_services %}checked{% endif %}> Услуги по предоставлению детской кроватки
+									</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				<button type="submit">Применить</button>
+			</form>
+		</div>
 
-    <div>
-        <h2>Фильтр</h2>
-            <h3>Цена</h3>
-            <input type="number" name="min_price" placeholder="Минимальная цена">
-            <input type="number" name="max_price" placeholder="Максимальная цена">
-            <button type="submit">Применить</button>
-    </div>
+    <div class="button-addhotel">
+			{% if user.is_superuser %}
+					<a href="{% url 'add' %}"><button>Добавить отель</button></a>
+			{% endif %}
+		</div>
 
-    <div>
-        {% if hotel %}
-            {% for el in hotel %}
-            <div style="margin: 20px; padding: 10px; border: 1px solid #ccc;">
-                <div>
-                    <img src="/media/{{ el.image1|default:'default.jpg' }}" alt="Фото отеля" width="200">
-                    <img src="/media/{{ el.image2|default:'default.jpg' }}" alt="Фото отеля" width="200">
-                    <img src="/media/{{ el.image3|default:'default.jpg' }}" alt="Фото отеля" width="200">
-                </div>
-                <div>
-                    <h3>{{ el.name }}</h3>
-                    <p>Адрес: {{ el.address }}</p>
-                    <p>Цена: {{ el.price }} руб/ночь</p>
-                    <p>Рейтинг: {{ el.rating }}/5</p>
-                    <a href="{% url 'hotel_detail' el.id %}">
-                        <button>Подробнее</button>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        {% else %}
-            <p>Отели не найдены. Попробуйте изменить параметры поиска.</p>
-        {% endif %}
-    </div>
+		<div class="HostelsBlock">
+			<h2 class="HostelsBlock-mainText">Отели в Санкт-Петербурге</h2>
+			{% if hotel %}
+					{% for el in hotel %}
+							<div class="HostelBlock">
+									<div class="HostelBlock-imgBlock">
+											<img src="{% static 'img/hotel1/hotel_1_1.jpg' %}" alt="image">
+											<img src="{% static 'img/hotel1/hotel_1_2.jpg' %}" alt="image">
+											<img src="{% static 'img/hotel1/hotel_1_3.jpg' %}" alt="image">
+											<img src="{% static 'img/hotel1/hotel_1_4.jpg' %}" alt="image">
+											<img src="{% static 'img/hotel1/hotel_1_5.jpg' %}" alt="image">
+									</div>
+									<div class="HostelBlock-TextBlock">
+											<div class="HostelBlock-TextBlock-main">
+													<div class="HostelBlock-TextBlock-raiting">
+															{% for i in "12345" %}
+																	{% if forloop.counter <= el.rating %}
+																			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path class="yellowStar" d="M5.565 1.041a.492.492 0 0 1 .899 0l1.152 2.693c.07.164.229.276.41.29l2.992.233c.431.034.606.557.278.83l-2.28 1.898a.465.465 0 0 0-.156.469l.696 2.837c.1.41-.357.732-.727.513l-2.561-1.52a.499.499 0 0 0-.507 0L3.2 10.804c-.37.22-.828-.104-.727-.513l.696-2.837a.465.465 0 0 0-.157-.469L.733 5.088c-.328-.274-.154-.797.278-.83l2.991-.234a.486.486 0 0 0 .41-.29l1.153-2.693Z"></path></svg>
+																	{% else %}
+																			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path class="grayStar" d="M5.565 1.041a.492.492 0 0 1 .899 0l1.152 2.693c.07.164.229.276.41.29l2.992.233c.431.034.606.557.278.83l-2.28 1.898a.465.465 0 0 0-.156.469l.696 2.837c.1.41-.357.732-.727.513l-2.561-1.52a.499.499 0 0 0-.507 0L3.2 10.804c-.37.22-.828-.104-.727-.513l.696-2.837a.465.465 0 0 0-.157-.469L.733 5.088c-.328-.274-.154-.797.278-.83l2.991-.234a.486.486 0 0 0 .41-.29l1.153-2.693Z"></path></svg>
+																	{% endif %}
+															{% endfor %}
+													</div>
+													<h2>Отель {{ el.name }}</h2>
+													<h3>
+															<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false" style=" width: 15px; "><defs><linearGradient id="dsId_NnBf2Akl1N0_linear_1525_533" x1="19.077" y1="11.12" x2="-.445" y2="16.269" gradientUnits="userSpaceOnUse"><stop stop-color="currentColor"></stop><stop offset="1" stop-opacity=".8" stop-color="currentColor"></stop></linearGradient></defs><path fill-rule="evenodd" clip-rule="evenodd" d="m12 24-6.08-5.7a10.702 10.702 0 0 1-3.356-7.784C2.564 5.305 6.79 1 12 1s9.436 4.305 9.436 9.516c0 2.934-1.215 5.776-3.355 7.783L12 24Zm0-18.282a4.718 4.718 0 1 0 0 9.436 4.718 4.718 0 0 0 0-9.436Z" fill="url(#dsId_NnBf2Akl1N0_linear_1525_533)" style="fill: #a0a1a1;"></path><path opacity=".2" d="M7.282 10.436a4.718 4.718 0 1 1 9.436 0 4.718 4.718 0 0 1-9.436 0Z" fill="currentColor" style=" fill: #e2e3e4; "></path></svg>
+															{{ el.address }}
+													</h3>
+											</div>
+											<div class="HostelBlock-TextBlock-add">
+													{% if el.room_types %}
+															<span>от {{ el.price }} ₽</span>
+													{% else %}
+															<p>Цена: Нет данных</p>
+													{% endif %}
+													<a href="{% url 'hotel_info' el.id %}"><button>Выбрать</button></a>
+													{% if user.is_superuser %}
+															<form action="{% url 'delete' el.id %}" method="post">
+																	{% csrf_token %}
+																	<button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот отель?');">Удалить</button>
+															</form>
+															<a href="{% url 'edit' el.id %}"><button type="button">Изменить</button></a>
+													{% endif %}
+											</div>
+									</div>
+							</div>
+					{% endfor %}
+			{% else %}
+					<p>Отели не найдены. Попробуйте изменить параметры поиска.</p>
+			{% endif %}
+			</div>
+		</section>
+	</content>
+
+	<footer class="footer">
+		<ul class="menu">
+		  <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+		  <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+		</ul>
+		<p>&copy;2021 Nadine Coelho | All Rights Reserved</p>
+	  </footer>
 </body>
 </html>

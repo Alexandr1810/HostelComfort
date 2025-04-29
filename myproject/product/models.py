@@ -3,15 +3,21 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-# Create your models here.
 class Hotel(models.Model):
+    RATING_CHOICES = [
+        (0, '0'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
     name = models.CharField('Название', max_length=50)
     address = models.CharField('Адрес', max_length=50)
     contact_phone = models.CharField('Контактный номер', max_length=11)
     email = models.CharField('Email', max_length=100)
     description = models.CharField('Описание', max_length=100)
-    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
-    price = models.IntegerField('Цена')
+    rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
         return self.name
@@ -26,23 +32,35 @@ class Room(models.Model):
         (1, 'Двуместный'),
         (2, 'Люкс'),
     ]
-
+    room_number = models.IntegerField('Номер комнаты')
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
     minbar = models.BooleanField('Мини-Бар', default=True)
     conditioner = models.BooleanField('Кондиционер', default=True)
+    television = models.BooleanField('Телевизор', default=True)
+    hairdryer = models.BooleanField("Фен", default = True)
+    safe = models.BooleanField("Сейф в номере", default = True)
+    Kettle_or_coffee_maker = models.BooleanField("Чайник или кофеварка", default = True)
+    Sound_insulation = models.BooleanField("Звукоизоляция", default = True)
+    Balcony_or_terrace = models.BooleanField("Балкон или терраса", default = True)
+    special_for_ivalid = models.BooleanField("Удобства для людей с ограниченными возможностями", default = True)
+    Telephone = models.BooleanField("Телефон", default = True)
+    Fridge = models.BooleanField("Холодильник", default = True)
+    Underfloor_heating = models.BooleanField("Пол с подогревом", default = True)
+    Work_facilities = models.BooleanField("Удобства для работы", default = True)
+    Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
+    price = models.IntegerField('Цена')
 
     def __str__(self):
-        # Получаем человекочитаемое название типа комнаты
-        return f"{self.get_type_display()} (Отель: {self.hotel_id.name})"
+        room_num_display = f" №{self.room_number}" if self.room_number else ""
+        return f"{self.get_type_display()}{room_num_display} (Отель: {self.hotel_id.name})"
     
     class Meta:
         verbose_name = 'Комната'
         verbose_name_plural = 'Комнаты'
 
-
 class Clients(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
     phio = models.CharField('ФИО', max_length=100)
     phone = models.CharField('Телефонный номер', max_length=11)
     email = models.CharField('Email', max_length=100)
@@ -87,3 +105,4 @@ class Reviews_and_ratings(models.Model):
     class Meta:
         verbose_name = 'Отзыв и оценка'
         verbose_name_plural = 'Отзывы и оценки'
+
