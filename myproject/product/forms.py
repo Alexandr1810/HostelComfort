@@ -1,5 +1,5 @@
 from django import forms
-from .models import Hotel
+from .models import Hotel, Room
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -17,7 +17,7 @@ class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ('username', 'email', 'password1', 'password2',
                  'phio', 'phone', 'passport_seria', 'passport_num')
-        
+
 class Add(forms.ModelForm):
     class Meta:
         model = Hotel
@@ -29,4 +29,32 @@ class Add(forms.ModelForm):
             "email": "Email",
             "description": "Описание",
             "rating": "Рейтинг",
+        }
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = [
+            'room_number', 'type', 'minbar', 'conditioner', 'television', 'hairdryer', 'safe',
+            'Kettle_or_coffee_maker', 'Sound_insulation', 'Balcony_or_terrace', 'special_for_ivalid',
+            'Telephone', 'Fridge', 'Underfloor_heating', 'Work_facilities', 'Baby_cot_services', 'price'
+        ]
+        labels = {
+            'room_number': 'Номер комнаты',
+            'type': 'Тип комнаты',
+            'minbar': 'Мини-Бар',
+            'conditioner': 'Кондиционер',
+            'television': 'Телевизор',
+            'hairdryer': 'Фен',
+            'safe': 'Сейф в номере',
+            'Kettle_or_coffee_maker': 'Чайник или кофеварка',
+            'Sound_insulation': 'Звукоизоляция',
+            'Balcony_or_terrace': 'Балкон или терраса',
+            'special_for_ivalid': 'Удобства для людей с ограниченными возможностями',
+            'Telephone': 'Телефон',
+            'Fridge': 'Холодильник',
+            'Underfloor_heating': 'Пол с подогревом',
+            'Work_facilities': 'Удобства для работы',
+            'Baby_cot_services': 'Услуги по предоставлению детской кроватки',
+            'price': 'Цена',
         }

@@ -2,10 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import AbstractUser
 
-
-# Create your models here.
 class Hotel(models.Model):
     RATING_CHOICES = [
         (0, '0'),
@@ -15,7 +12,6 @@ class Hotel(models.Model):
         (4, '4'),
         (5, '5'),
     ]
-
     name = models.CharField('Название', max_length=50)
     address = models.CharField('Адрес', max_length=50)
     contact_phone = models.CharField('Контактный номер', max_length=11)
@@ -39,7 +35,6 @@ class Room(models.Model):
     room_number = models.IntegerField('Номер комнаты')
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
     type = models.IntegerField('Тип комнаты', choices=ROOM_TYPE_CHOICES)
-    
     minbar = models.BooleanField('Мини-Бар', default=True)
     conditioner = models.BooleanField('Кондиционер', default=True)
     television = models.BooleanField('Телевизор', default=True)
@@ -56,7 +51,6 @@ class Room(models.Model):
     Baby_cot_services = models.BooleanField("Услуги по предоставлению детской кроватки", default = True)
     price = models.IntegerField('Цена')
 
-
     def __str__(self):
         room_num_display = f" №{self.room_number}" if self.room_number else ""
         return f"{self.get_type_display()}{room_num_display} (Отель: {self.hotel_id.name})"
@@ -64,8 +58,6 @@ class Room(models.Model):
     class Meta:
         verbose_name = 'Комната'
         verbose_name_plural = 'Комнаты'
-
-
 
 class Clients(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) 

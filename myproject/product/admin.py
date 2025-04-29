@@ -15,6 +15,7 @@ class HotelAdmin(admin.ModelAdmin):
     list_display = ('name', 'address', 'contact_phone', 'email', 'rating')
     fields = ('name', 'address', 'contact_phone', 'email', 'description', 'rating')
 
+# Чтобы таблицы выводились на панели админа 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Clients)

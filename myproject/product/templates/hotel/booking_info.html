@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Индекс</title>
+	{% load static %}
+	<style>
+		@font-face {
+			font-family: "tinkoff";
+
+			src: url("{% static 'fonts/tinkoffsans-medium.woff2' %}") format('woff2'),
+			url("{% static 'fonts/tinkoffsans-medium.woff' %}") format('woff');
+		} 
+	</style>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'img/favicon-home.svg' %}" type="image/x-icon">
 </head>
-<body>
-	<div>
-		<div>Бронирование Успешно</div>
-		<div>Название номера: {{ hotel.name }}</div>
-		<div>Вывести название номера</div>
-		<div>Дату заезда: {{ hotel.check_in_date }}</div>
-		<div>Дату выезда: {{ hotel.departure_date }}</div>
-		<a href="{% url 'hotel' %}"><button>Закрыть</button></a>
-	</div>
+<body >
+	<header id="classicHeader">
+		<div class="logoblock">
+			<img src="{% static 'img/icon-home.svg' %}" alt="">
+			<h1>
+				Комфорт Отель
+			</h1>
+		</div>
+		<div class="loginBlock">
+			<a class="loginBlock-phone" href="tel: 8(800)922-22-22">8 (800) 922-22-22</a>
+      {% if user.is_authenticated %}
+        <a class="loginBlock-profile" href="{% url 'user_profile' %}">профиль</a>
+      {% else %}
+        <a class="loginBlock-link" href="{% url 'login' %}">войти</a>
+      {% endif %}
+		</div>
+	</header>
+	<content>
+		<section id="SuccsessBooking-Section">
+			<div class="SuccsessBooking">
+				<div class="SuccsessBooking-header">
+					<h1 class="SuccsessBooking-Title">Бронирование Успешно</h1>
+					<span class="SuccsessBooking-Id">№1975456</span>
+				</div>
+				<div class="SuccsessBooking-body">
+					<div class="SuccsessBooking-img">
+						<img src="{% static 'img/hotel1/rooms/room2/room2_1.jpeg' %}">
+						<img src="{% static 'img/hotel1/rooms/room2/room2_2.jpeg' %}">
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">{{ hotel.name }}</span>
+						<span class="SuccsessBooking-info-title">-</span>
+						<span class="SuccsessBooking-info-text">{{ reservation.room_id.get_type_display }}</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Дата заезда:</span>
+						<span class="SuccsessBooking-info-text">{{ reservation.check_in_date|date:"d.m.Y" }}</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Дыта выезда:</span>
+						<span class="SuccsessBooking-info-text">{{ reservation.departure_date|date:"d.m.Y" }}</span>
+					</div>
+					<div class="SuccsessBooking-info">
+						<span class="SuccsessBooking-info-title">Оплата:</span>
+						<span class="SuccsessBooking-info-text">Доделать ₽</span>
+					</div>
+				</div>
+				<a href="{% url 'hotel' %}"><button>Готово</button></a>
+			</div>
+		</section>
+	</content>
 </body>
 </html>
