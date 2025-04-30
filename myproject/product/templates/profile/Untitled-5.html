@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Профиль пользователя</title>
+</head>
+<body>
+	<div>
+		<h1>Профиль пользователя</h1>
+		<div>
+			{% if user.is_authenticated %}
+				<a href="{% url 'user_profile' %}">Профиль</a> |
+				<form action="{% url 'logout' %}?next={% url 'login' %}" method="post" style="display:inline;">
+					{% csrf_token %}
+					<button type="submit">Выйти</button>
+				</form>
+			{% else %}
+				<a href="{% url 'login' %}">Войти</a> |
+				<a href="{% url 'register' %}">Регистрация</a>
+			{% endif %}
+		</div>
+	</div>
+
+	<br>
+	<div>Имя:{{ client.phio }}</div>
+	<div>Номер: {{ client.phone }}</div>
+	<div>Email: {{ client.email }}</div>
+	<div>Id: {{ client.id }}</div>
+
+	<h3>Ваши бронирования</h3>
+	{% if reservations %}
+		<div style="display: flex; align-items: flex-start; gap: 20px;">
+			<table border="1" cellpadding="5" cellspacing="0" style="max-width: 700px;">
+				<thead>
+					<tr>
+						<th>Отель</th>
+						<th>Тип комнаты</th>
+						<th>Номер комнаты</th>
+						<th>Дата заезда</th>
+						<th>Дата выезда</th>
+						<th>Общая сумма</th>
+						<th style="border:none !important;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for reservation in reservations %}
+					<tr>
+					<td>{{ reservation.room_id.hotel_id.name }}</td>
+					<td>{{ reservation.room_id.get_type_display }}</td>
+					<td>{{ reservation.room_id.room_number }}</td>
+					<td>{{ reservation.check_in_date|date:"d.m.Y" }}</td>
+					<td>{{ reservation.departure_date|date:"d.m.Y" }}</td>
+					<td>{{ reservation.total_amount }} руб.</td>
+					<td style="border:none; border-right: none; padding:0; text-align:right;">
+						<form method="post" action="{% url 'cancel_booking' reservation.id %}" onsubmit="return confirm('Вы уверены, что хотите снять бронирование?');" style="margin:0;">
+							{% csrf_token %}
+							<button type="submit" style="padding: 5px 10px; background-color: transparent; border: 1px solid black; border-radius: 4px; color: black; cursor: pointer; font-family: Arial, sans-serif;">
+								Снять бронь
+							</button>
+						</form>
+					</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 35px;">
+			</div>
+		</div>
+			</tbody>
+		</table>
+	{% else %}
+		<p>У вас пока нет бронирований.</p>
+	{% endif %}
+
+	<div style="margin-top: 20px;">
+		<a href="{% url 'hotel' %}"><button>Посмотреть отели</button></a>
+	</div>
+</body>
+</html>

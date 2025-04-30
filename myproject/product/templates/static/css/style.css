@@ -1,0 +1,846 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+html{
+    overflow-x: hidden;
+}
+
+body{
+    font-family: 'tinkoff',sans-serif; 
+    background: #f6f7f8;
+    color: #313132;
+}
+input{
+    border: none;
+    background: #f2f4f7;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+button{
+    background: #ffdd2d;
+    border-radius: 10px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+header#bigHeader {
+    width: 99vw;
+    height: 80vh;
+    background-size: cover;
+    background-position-y: -55px;
+}
+
+.mainHeader{
+    background-image: -webkit-linear-gradient(top, rgb(0 0 0 / 10%), rgb(255 255 255 / 10%));
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 10%;
+    justify-content: space-between;
+    background-size: cover;
+}
+.innerHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 18px;
+    padding: 20px;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 2%;
+    
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый */
+    backdrop-filter: blur(10px); /* Размытие фона */
+    -webkit-backdrop-filter: blur(10px); /* Для Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Нежная тень */
+    color: rgb(255 255 255 / 75%);
+}
+
+.innerHeader span{
+    font-size: 24px;
+    font-weight: 800;
+    color: rgb(255 255 255 / 75%);
+}
+.loginBlock{
+    width: 15vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 320px;
+}
+.loginBlock-phone, .loginBlock-link{
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgb(255 255 255 / 75%);
+    transition: 0.3s;
+}
+.loginBlock-phone:hover, .loginBlock-link:hover{
+    color: #ffdd2d;
+}
+.innerTextBlock{
+    width: fit-content;
+    margin-bottom: 3%;
+    padding: 3% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый */
+    backdrop-filter: blur(10px); /* Размытие фона */
+    -webkit-backdrop-filter: blur(10px); /* Для Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Нежная тень */
+    color: rgb(255 255 255 / 90%);
+}
+
+.innerTextBlock h1{
+    font-size: 46px;
+}
+.innerTextBlock h2{
+    font-size: 36px;
+}
+.Hostels_and_Filter_Block{
+    width: 99vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.mainFilter{
+    width: 18vw;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 2vw;
+    max-height: fit-content;
+}
+.mainFilter h2{
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.mainFilter h3{
+    font-size: 24px;
+    font-weight: 500;
+}
+.filterBlock-elem{
+    margin-bottom: 10px;
+}
+.filterBlock-elem-input{
+    margin-top: 10px;
+}
+
+.priceInput-block{
+    display: flex;
+    justify-content: space-between;
+}
+.priceInput-block input{
+    width: 38%;
+}
+.amenities-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+}
+.amenities-list li {
+    padding: 8px 0;
+}
+.amenities-list label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+
+}
+/* Фиксированный размер чекбокса */
+.amenities-list input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 12px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    padding: 10px;
+}
+/* Стиль для активного чекбокса */
+.amenities-list input[type="checkbox"]:checked {
+    background-color: #ffdd2d;
+    border-color: #ffdd2d;
+}
+/* Галочка в чекбоксе */
+.amenities-list input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.amenities-list span {
+    flex-grow: 1;
+}
+.mainFilter button{
+    width: 60%;
+    height: 50px;
+    margin-left: 20%;
+    margin-top: 10px;
+}
+.HostelsBlock{
+    width: 50vw;
+}
+.HostelsBlock-mainText {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+.HostelBlock{
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 20%;
+}
+
+.HostelBlock-imgBlock {
+    height: 55%;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    border-radius: 10px;
+}
+
+.HostelBlock-imgBlock img{
+    height: 100%;
+    margin-right: 10px;
+}
+/* Скругляем углы у первого изображения */
+.HostelBlock-imgBlock img:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+  
+/* Скругляем углы у последнего изображения */
+.HostelBlock-imgBlock img:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.HostelBlock-TextBlock-main h2{
+    font-size: 26px;
+}
+.HostelBlock-TextBlock{
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.HostelBlock-TextBlock-raiting{
+    margin: 10px 0;
+}
+.HostelBlock-TextBlock-raiting svg{
+    width: 15px;
+}
+.yellowStar{
+    fill: #fab619;
+}
+.grayStar{
+    fill: darkgray;
+}
+.HostelBlock-TextBlock-main h3{
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.HostelBlock-TextBlock-add{
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.HostelBlock-TextBlock-add span{
+    font-weight: 700;
+    font-size: 26px;
+}
+.HostelBlock-TextBlock-add button{
+    margin-top: 10px;
+    width: 140px;
+}
+
+
+
+
+
+.footer {
+    position: relative;
+    width: 99vw;
+    background: #ffffff;
+    min-height: 100px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  .social-icon,
+  .menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  
+  .social-icon__item,
+  .menu__item {
+    list-style: none;
+  }
+  
+  .social-icon__link {
+    font-size: 2rem;
+    color: #fff;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+  }
+  .social-icon__link:hover {
+    transform: translateY(-10px);
+  }
+  
+  .menu__link {
+    font-size: 1.2rem;
+    color: #000000;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+    text-decoration: none;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+  
+  .menu__link:hover {
+    opacity: 1;
+  }
+  
+  .footer p {
+    margin: 15px 0 10px 0;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+
+  /* Страница Отеля*/
+.sectionTitle{
+    margin-bottom: 20px;
+}
+header#classicHeader{
+    height: 70px;
+    background: white;
+    display: flex;
+    padding: 0 10%;
+    align-items: center;
+    justify-content: space-between;
+}
+header#classicHeader .logoblock{
+    display: flex;
+    align-items: center;
+}
+header#classicHeader .logoblock img{
+    height: 50px;
+}
+
+header#classicHeader .loginBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+}
+header#classicHeader .loginBlock-phone, header#classicHeader .loginBlock-link{
+    color: #313132 !important;
+    transition: 0.3s;
+}
+
+header#classicHeader .loginBlock-phone:hover, header#classicHeader .loginBlock-link:hover{
+    color: black!important;
+}
+#mainHotel{
+    padding: 0 20%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+}
+.mainHotel-imageBlock {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    border-radius: 10px;
+}
+
+/* Скругляем углы у первого изображения */
+.mainHotel-imageBlock img:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+  
+/* Скругляем углы у последнего изображения */
+.mainHotel-imageBlock img:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.mainHotel-imageBlock img{
+    height: 100%;
+    margin-right: 10px;
+}
+.mainHotel-textBlockRaiting{
+    height: 20px;
+    display: flex;
+}
+.mainHotel-textBlockName{
+    font-size: 46px;
+}
+
+.mainHotel-textBlockContacts{
+    margin: 0 0 20px 0;
+    color: #313132;
+    font-size: 20px;
+}
+
+.mainHotel-textBlockContacts div{
+    margin-top: 5px;
+}
+.mainHotel-textBlockContacts img{
+    height: 20px;
+    vertical-align: text-top;
+    margin-right: 5px;
+}
+
+#aboutHotel{
+    margin: 20px 20%;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+}
+#aboutHotel label{
+    font-size: 19px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+#aboutHotel h1{
+    margin-bottom: 10px;
+}
+.sendCommentBlock{
+    margin: 20px 20%;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+.sendCommentBlock-write textarea{
+    width: 96%;
+    height: 100px;
+    padding: 10px;
+    font-size: 19px;
+    border-radius: 10px;
+    border: 1px solid #313132;
+    margin: 15px 1%;
+}
+
+.sendCommentBlock-write button{
+    margin-left: 1%;
+    width: 150px;
+}
+.CommentsBlock{
+    margin: 0 20%;
+}
+
+.commentBlock{
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 60%;
+    margin-bottom: 20px;
+}
+.commentBlock-head{
+    display: flex;
+    justify-content: space-between;
+}
+.contentSender{
+    font-size: 23px;
+}
+.contentDate{
+    font-size: 16px;
+}
+.commentInfo{
+    display: flex;
+    align-items: center;
+}
+.commentRaiting{
+    background: #c2eecd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: #273029;
+    margin-left: 10px;
+}
+.commentRaiting.green{
+    background: #c2eecd;
+}
+.commentRaiting.yellow{
+    background: #fff1ab
+}
+.commentRaiting.red{
+    background: #ff1a1aa3;
+    color: white;
+}
+.commentRaiting-text{
+    font-size: 20px;
+}
+.commentBlock-body{
+    font-size: 18px;
+    margin-top: 10px;
+}
+#roomsAndAmenities{
+    margin: 0 20%;
+    display: flex;
+    justify-content: space-between;
+}
+.Rooms{
+    width: 70%;
+}
+.roomBlock{
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    margin-bottom: 20px;
+
+}
+.roomBlock .aboutRoomText{
+    width: 60%;
+}
+.roomName{
+    font-weight: 500;
+}
+.roomtype{
+    font-weight: 500;
+}
+.roomAmenities span {
+    margin: 5px 5px 0px 0;
+    color: #757575;
+    display: inline-block;
+}
+.roomImg-roomPrice{
+    width: 40%;
+    max-height: 250px;
+}
+.roomImgs {
+    height: 100%;
+    display: flex;
+    overflow-x: auto;
+    border-radius: 10px;
+    scrollbar-width: none;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    border-radius: 10px;
+}
+
+.roomImgs img{
+    height: 100%;   
+    margin-right: 10px;
+}
+/* Скругляем углы у первого изображения */
+.roomImgs img:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+/* Скругляем углы у последнего изображения */
+.roomImgs img:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.roomPrice{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 10%;
+}
+.roomPrice span{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.roomPrice button{
+    width: 150px;
+}
+.roomAmenities span span{
+    margin-right: 3px;
+}
+.Amenities {
+    width: 300px;
+}
+.amenitiesBlock {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.amenitiesBlock label{
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.amenitiesBlock label span{
+    color: #35ba56;
+    margin-right: 10px;
+    font-weight: 700;
+}
+/*  Страница бронирования */
+#bookingForm-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%;
+}
+.bookingForm h2{
+    font-size: 30px;
+}
+.bookingForm div{
+    font-size: 18px;
+}
+.bookingForm{
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 40%;
+}
+.bookingForm-date{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0 2%;
+}
+.bookingForm-date div{
+    width: 90%;
+}
+.bookingForm-date form .div50{
+    width: 45%;
+}
+.bookingForm-date input{
+    width: 100%;
+}
+.bookingForm-contacts{
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.bookingForm-price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+}
+.bookingForm-price button{
+    width: 150px;
+}
+.bookingForm-date form{
+    width: 100%;
+}
+/*Страница Успешного бронирования*/
+#SuccsessBooking-Section{
+    display: flex;
+    justify-content: center;
+    padding-top: 3%;
+}
+.SuccsessBooking{
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 50%;
+}
+.SuccsessBooking-Title, .SuccsessBooking-Id{
+    font-size: 30px;
+}
+.SuccsessBooking-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.SuccsessBooking-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.SuccsessBooking-img img{
+    width: 49%;
+    border-radius: 15px;
+}
+.SuccsessBooking-info{
+    margin-bottom: 5px;
+}
+.SuccsessBooking-info-title{
+    font-size: 22px;
+}
+.SuccsessBooking-info-text{
+    font-size: 22px;
+}
+.SuccsessBooking button{
+    width: 150px;
+    margin-top: 5px;
+}
+@media (max-width: 1710px) {
+    #roomsAndAmenities, .CommentsBlock{    
+        margin: 0 10%;
+    }
+    #mainHotel{   
+        padding: 0 10%;
+    }
+    #aboutHotel{
+        margin: 20px 10%;
+    }
+    .sendCommentBlock{
+        margin: 20px 10%;
+    }
+}
+
+/* Вход/регистрация */
+.loginSection{    
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 30%;
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loginSection .login_form{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.loginSection .login_form .form-group{
+    margin: 5px;
+}
+.loginSection .login_form .form-group input{
+    border: none;
+    background: #f2f4f7;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 92%;
+}
+.loginSection .login_form .form-group label{
+    display: block;
+    width: 100%;
+}
+.loginSection .login_form a{
+    width: 100%;
+}
+.loginSection .login_form a button{
+    margin: 10px 5px;
+    width: 100%;
+}
+.loginSection p a{
+    color: #313132;
+}
+.loginSection p a:hover{
+    color: black;
+}
+div.login_form{
+    margin-bottom: 10px;
+}
+.registerSection{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.login_form-pasport{
+    display: flex;
+    justify-content: space-around;
+    width: 109%;
+
+}
+.login_form-pasport input{
+    width: 50%;
+}
+
+.registerSection .login_form form input{
+    margin: 10px 5px;
+    width: 100%;
+}
+.registerSection .login_form form button{
+    width: 109%;
+}
+/*Страница профиля*/
+.profileSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+}
+.profileSection h2{
+    font-size: 36px;
+}
+.profileSection-block{
+    width: 50%;
+}
+.profileSection-info{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 30px;
+}
+.profileSection-info input{
+    margin: 5px;
+}
+.userBookingSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+}
+.userBookingSection h2{
+    font-size: 36px;
+}
+.userBookingSection-block{
+    width: 50%;
+}
+.userBookingSection-item{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,189 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  {% include "header.html" %}
+	<content id="hotel_info-content">
+		<section id="mainHotel">
+			<div class="mainHotel-textBlock">
+				<div class="mainHotel-textBlockRaiting">
+					{% for i in "12345" %}
+            {% if forloop.counter <= hotel.rating %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path class="yellowStar" d="M5.565 1.041a.492.492 0 0 1 .899 0l1.152 2.693c.07.164.229.276.41.29l2.992.233c.431.034.606.557.278.83l-2.28 1.898a.465.465 0 0 0-.156.469l.696 2.837c.1.41-.357.732-.727.513l-2.561-1.52a.499.499 0 0 0-.507 0L3.2 10.804c-.37.22-.828-.104-.727-.513l.696-2.837a.465.465 0 0 0-.157-.469L.733 5.088c-.328-.274-.154-.797.278-.83l2.991-.234a.486.486 0 0 0 .41-.29l1.153-2.693Z"></path></svg>
+            {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path class="grayStar" d="M5.565 1.041a.492.492 0 0 1 .899 0l1.152 2.693c.07.164.229.276.41.29l2.992.233c.431.034.606.557.278.83l-2.28 1.898a.465.465 0 0 0-.156.469l.696 2.837c.1.41-.357.732-.727.513l-2.561-1.52a.499.499 0 0 0-.507 0L3.2 10.804c-.37.22-.828-.104-.727-.513l.696-2.837a.465.465 0 0 0-.157-.469L.733 5.088c-.328-.274-.154-.797.278-.83l2.991-.234a.486.486 0 0 0 .41-.29l1.153-2.693Z"></path></svg>
+            {% endif %}
+          {% endfor %}
+        </div>
+				<h1 class="mainHotel-textBlockName">{{ hotel.name }}</h1>
+
+				<div class="mainHotel-textBlockContacts">
+					<div><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false" style="height: 20px; margin-right: 5px;"><defs><linearGradient id="dsId_NnBf2Akl1N0_linear_1525_533" x1="19.077" y1="11.12" x2="-.445" y2="16.269" gradientUnits="userSpaceOnUse"><stop stop-color="currentColor"></stop><stop offset="1" stop-opacity=".8" stop-color="currentColor"></stop></linearGradient></defs><path fill-rule="evenodd" clip-rule="evenodd" d="m12 24-6.08-5.7a10.702 10.702 0 0 1-3.356-7.784C2.564 5.305 6.79 1 12 1s9.436 4.305 9.436 9.516c0 2.934-1.215 5.776-3.355 7.783L12 24Zm0-18.282a4.718 4.718 0 1 0 0 9.436 4.718 4.718 0 0 0 0-9.436Z" fill="url(#dsId_NnBf2Akl1N0_linear_1525_533)" style="fill: #a0a1a1;"></path><path opacity=".2" d="M7.282 10.436a4.718 4.718 0 1 1 9.436 0 4.718 4.718 0 0 1-9.436 0Z" fill="currentColor" style=" fill: #e2e3e4; "></path></svg>
+            {{ hotel.address }}<br></div>
+					<div><img src="{% static 'img/phone.svg' %}">
+            {{ hotel.contact_phone }}<br></div>
+					<div><img src="{% static 'img/email.svg' %}">
+            {{ hotel.email }}</div>
+				</div>
+			</div>
+			<div class="mainHotel-imageBlock">
+				<img src="{% static 'img/hotel1/hotel_1_1.jpg' %}" alt="image">
+				<img src="{% static 'img/hotel1/hotel_1_2.jpg' %}" alt="image">
+				<img src="{% static 'img/hotel1/hotel_1_3.jpg' %}" alt="image">
+				<img src="{% static 'img/hotel1/hotel_1_4.jpg' %}" alt="image">
+				<img src="{% static 'img/hotel1/hotel_1_5.jpg' %}" alt="image">
+			</div>
+		</section>
+		<section id="aboutHotel">
+			<h2 class="sectionTitle">Об отеле</h2>
+			<label>
+        {{ hotel.description }}
+			</label>
+		</section>
+		<section id="roomsAndAmenities">
+			<div class="Rooms">
+				<h2 class="sectionTitle">Все номера</h2>
+				{% for room in rooms %}
+				<div class="roomBlock">
+					<div class="aboutRoomText">
+						<h2 class="roomName">Одноместный номер Standard</h2>
+						<div class="roomAmenities">
+              {% if room.minbar %}
+                <label><span>•</span>Мини-Бар</label>
+              {% endif %}
+              {% if room.conditioner %}
+                <label><span>•</span>Кондиционер</label>
+              {% endif %}
+              {% if room.television %}
+                <label><span>•</span>Телевизор</label>
+              {% endif %}
+              {% if room.hairdryer %}
+                <label><span>•</span>Фен</label>
+              {% endif %}
+              {% if room.safe %}
+                <label><span>•</span>Сейф в номере</label>
+              {% endif %} 
+              {% if room.Kettle_or_coffee_maker %}
+                <label><span>•</span>Чайник или кофеварка</label>
+              {% endif %}
+              {% if room.Sound_insulation %}
+                <label><span>•</span>Звукоизоляция</label>
+              {% endif %}
+              {% if room.Balcony_or_terrace %}
+                <label><span>•</span>Балкон или терраса</label>
+              {% endif %}
+              {% if room.special_for_ivalid %}
+                <label><span>•</span>Удобства для людей с ограниченными возможностями</label>
+              {% endif %}
+              {% if room.Telephone %}
+                <label><span>•</span>Телефон</label>
+              {% endif %}
+              {% if room.Fridge %}
+                <label><span>•</span>Холодильник</label>
+              {% endif %}
+              {% if room.Underfloor_heating %}
+                <label><span>•</span>Пол с подогревом</label>
+              {% endif %}
+              {% if room.Work_facilities %}
+                <label><span>•</span>Удобства для работы</label>
+              {% endif %}
+              {% if room.Baby_cot_services %}
+                <label><span>•</span>Услуги по предоставлению детской кроватки</label>
+              {% endif %} 
+						</div>
+						<div class="roomPrice">
+							<span>{{ room.price }} ₽</span>
+							<a href="{% url 'booking' hotel.id room.room_number %}"><button>Выбрать</button></a>
+              {% if user.is_staff %}
+                <a href="{% url 'edit_room' hotel.id room.room_number %}"><button>Редактировать</button></a>
+              {% endif %}
+						</div>
+					</div>
+					<div class="roomImg-roomPrice">
+						<div class="roomImgs">
+							<img src="{% static 'img/hotel1/rooms/room1/room1_1.jpeg' %}">
+							<img src="{% static 'img/hotel1/rooms/room1/room1_2.jpeg' %}">
+						</div>  
+					</div>
+        </div>
+				{% endfor %}
+      </div>
+			<div class="Amenities">
+				<h2 class="sectionTitle">Удобства отеля</h2>
+				<div class="amenitiesBlock">
+          {% for amenity in amenities_set %}
+            <label><span>✔</span>{{ amenity }}</label>
+          {% endfor %}
+				</div>
+			</div>
+		</section>
+		<section id="commentSection">
+			<div class="sendCommentBlock">
+				<h2>Оставить комментарий</h2>
+			<div class="sendCommentBlock-write">
+        {% if user.is_authenticated %}
+			    <form method="post" action="">
+            {% csrf_token %}
+            <label for="estimation">Оценка (1-5):</label>
+            <select name="estimation" id="estimation">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select>
+            <br>
+            <textarea name="comment" placeholder="Напишите.."></textarea>
+            <button type="submit">Отправить</button>
+          </form>
+        {% else %}
+          <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить отзыв.</p>
+        {% endif %}
+			</div>
+			</div>
+			<div class="CommentsBlock">
+				<h2 class="sectionTitle">Отзывы гостей</h2>
+				<!-- оценка 5,4 - Никидываем класс green в commentRaiting -->
+				<!-- оценка 3 - Никидываем класс yellow в commentRaiting -->
+				<!-- оценка 1,2 - Никидываем класс red в commentRaiting -->
+        {% for review in comments %}
+				<div class="commentBlock">
+
+					<div class="commentBlock-head">
+            <h3 class="contentSender">{{ review.client_id.phio }}</h3>  
+            <div class="commentInfo"> 
+              <span class="contentDate">{{ review.date|date:"d.m.Y H:i" }}</span>
+              {% if review.estimation == 5 or review.estimation == 4 %}
+                <div class="commentRaiting green">
+                  <span class="commentRaiting-text">{{ review.estimation }}</span>
+                </div>
+              {% elif review.estimation == 3 %}
+                <div class="commentRaiting yellow">
+                  <span class="commentRaiting-text">{{ review.estimation }}</span>
+                </div>
+              {% else %}
+                <div class="commentRaiting red">
+                  <span class="commentRaiting-text">{{ review.estimation }}</span>
+                </div>
+              {% endif %} 
+            </div>
+          </div>
+          <p class="commentBlock-body">{{ review.comment }}</p>
+            {% if user.is_superuser %}
+                <form action="{% url 'comment_delete' review.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?');">Удалить</button>
+                </form>
+            {% endif %}
+        </div>
+        {% empty %}
+          <p>Пока нет комментариев.</p>
+        {% endfor %}
+      </div>
+		</section>
+	</content>
+	
+	
+	{% include "footer.html" %}
+</body>
+</html>
